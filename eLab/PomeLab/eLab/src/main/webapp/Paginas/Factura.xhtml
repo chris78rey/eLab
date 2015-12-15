@@ -1,16 +1,258 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+
+
+        <div class="EmptyBox10"/>
+        <div class="Container100 BorBotLeaden ui-fluid">  
+            <div class="ContainerIndent">           
+                <p:panel header="Factura">
+                    <div class="EmptyBox10"></div>
+                    <div class="EmptyBox10"></div>
+                    <h:form id="f1">
+                        <div class="ui-grid-row">  
+                            <div class="ui-panelgrid-cell ui-grid-col-2">
+                                <p:outputLabel value="Número de Factura:"  />
+                            </div> 
+                            <div class="ui-panelgrid-cell ui-grid-col-4">
+                                <p:autoComplete  value="#{factura.facturaObj.numeroFactura}" completeMethod="#{factura.completeText}"   >
+
+                                </p:autoComplete>
+                            </div>  
+                            <div class="ui-panelgrid-cell ui-grid-col-2">
+                                <p:commandButton value="Buscar" 
+                                                 process="@form" 
+                                                 update=":f3,:f2,:f4,:f3:numeroFactura,@form"  
+                                                 actionListener="#{factura.buttonAction}"  />
+                            </div>  
+                            <div class="ui-panelgrid-cell ui-grid-col-4">
+                                <p:commandButton value="Nuevo" 
+                                                 process="@form" 
+                                                 update=":f3,:f2,:f4,:f1"  
+                                                 actionListener="#{factura.buttonAction2}"  />
+                            </div>  
+                        </div>
+                    </h:form>
+                    <div class="EmptyBox20"></div>
+                    <div class="EmptyBox20"></div>
+                    <h:form id="f2">
+                        <div class="ui-grid-row">  
+                            <div class="ui-panelgrid-cell ui-grid-col-2">
+                                <p:outputLabel value="CcRucPasaporte:" />
+
+                            </div> 
+                            <div class="ui-panelgrid-cell ui-grid-col-4"> 
+
+                                <p:autoComplete id="acSimple"  value="#{factura.persona.ccRucPasaporte}"   completeMethod="#{factura.completeText1}" >
+                                    <f:ajax event="blur" render="@form :f3:nbs"  listener="#{factura.listen1(event)}"/>
+                                </p:autoComplete>
+
+                            </div>  
+                            <div class="ui-panelgrid-cell ui-grid-col-2">
+                                <p:outputLabel value="Apellidos:" for="apellidos" />
+
+                            </div>  
+                            <div class="ui-panelgrid-cell ui-grid-col-4">
+                                <p:inputText id="apellidos" value="#{factura.persona.apellidos}" title="Apellidos" />
+
+                            </div>  
+                        </div>  
+
+
+                        <div class="EmptyBox20"></div>
+
+
+
+
+                        <div class="EmptyBox10"></div>
+                        <div class="EmptyBox10"></div>
+                        <div class="ui-grid-row">  
+                            <div class="ui-panelgrid-cell ui-grid-col-2">
+                                <p:outputLabel value="Nombres:" for="nombres" />
+                            </div> 
+                            <div class="ui-panelgrid-cell ui-grid-col-4">
+                                <p:inputText id="nombres" value="#{factura.persona.nombres}" title="Nombres" />
+
+                            </div>  
+                            <div class="ui-panelgrid-cell ui-grid-col-2">
+                                <p:outputLabel value="Telef:" for="telef" />
+
+                            </div>  
+                            <div class="ui-panelgrid-cell ui-grid-col-4">
+                                <p:inputText id="telef" value="#{factura.persona.telef}" title="Telef" />
+
+                            </div>  
+                        </div>  
+
+                        <div class="EmptyBox10"></div>
+                        <div class="EmptyBox10"></div>
+                        <div class="ui-grid-row">  
+                            <div class="ui-panelgrid-cell ui-grid-col-2">
+                                <p:outputLabel value="Celular:" for="celular" />
+
+                            </div> 
+                            <div class="ui-panelgrid-cell ui-grid-col-4">
+                                <p:inputText id="celular" value="#{factura.persona.celular}" title="Celular" />
+
+                            </div>  
+                            <div class="ui-panelgrid-cell ui-grid-col-2">
+                                <p:outputLabel value="Email:" for="email" />
+
+                            </div>  
+                            <div class="ui-panelgrid-cell ui-grid-col-4">
+                                <p:inputText id="email" value="#{factura.persona.email}" title="Email" />
+
+                            </div>  
+                        </div>  
+
+                        <div class="EmptyBox10"></div>
+                        <div class="EmptyBox10"></div>
+
+                        <div class="ui-grid-row">  
+                            <div class="ui-panelgrid-cell ui-grid-col-2">
+                                <p:outputLabel value="Direccion:" for="direccion" />
+
+                            </div> 
+                            <div class="ui-panelgrid-cell ui-grid-col-4">
+                                <p:inputText id="direccion" value="#{factura.persona.direccion}" title="Direccion" />
+
+                            </div>  
+                            <div class="ui-panelgrid-cell ui-grid-col-2">
+                            </div>  
+                            <div class="ui-panelgrid-cell ui-grid-col-4">
+                            </div>  
+                        </div>  
+                        <div class="ui-grid-row">  
+                            <div class="ui-panelgrid-cell ui-grid-col-2">
+                                <p:commandButton 
+                                    value="Actualizar Datos" 
+                                    id="ajax" 
+                                    process="@form"
+                                    update="@all" 
+                                    actionListener="#{factura.buttonAction1}" 
+                                    styleClass="ui-priority-primary" />
+                            </div> 
+                            <div class="ui-panelgrid-cell ui-grid-col-4">
+                            </div>  
+                            <div class="ui-panelgrid-cell ui-grid-col-2">
+                            </div>  
+                            <div class="ui-panelgrid-cell ui-grid-col-4">
+                            </div>  
+                        </div>  
+
+                    </h:form>
+
+
+
+
+                    <div class="EmptyBox10"></div>
+                    <div class="EmptyBox10"></div>
+
+                    <h:form id="f3">
+                       
+                        <div class="ui-grid-row">  
+                            <div class="ui-panelgrid-cell ui-grid-col-2">
+                                <p:outputLabel value="NumeroFactura:"  />
+                            </div> 
+                            <div class="ui-panelgrid-cell ui-grid-col-4">
+                                <p:inputText id="numeroFactura" value="#{factura.facturaObj.numeroFactura}" title="NumeroFactura" />
+                            </div>  
+                            <div class="ui-panelgrid-cell ui-grid-col-2">
+                                <p:outputLabel value="Fecha:"  />
+                            </div>  
+                            <div class="ui-panelgrid-cell ui-grid-col-4">
+                                <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy" 
+                                            value="#{factura.facturaObj.fecha}" 
+                                            title="Fecha:"  
+                                            showOn="button"/>
+                            </div>  
+                        </div>  
+
+
+                    </h:form>
+
+
+
+                    <h:form id="f4">
+
+                        <p:dataTable value="#{factura.findDetalleFactura}" var="item">
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Id"/>
+                                </f:facet>
+                                <h:outputText value="#{item.id}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Cantidad"/>
+                                </f:facet>
+                                <h:outputText value="#{item.cantidad}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Valor"/>
+                                </f:facet>
+                                <h:outputText value="#{item.valor}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="ClasifDescri"/>
+                                </f:facet>
+                                <h:outputText value="#{item.clasifDescri}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="TieneDescuento"/>
+                                </f:facet>
+                                <h:outputText value="#{item.tieneDescuento}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="FechaCreacion"/>
+                                </f:facet>
+                                <h:outputText value="#{item.fechaCreacion}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="T00Clasificador"/>
+                                </f:facet>
+                                <h:outputText value="#{item.t00Clasificador}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="T00Medico"/>
+                                </f:facet>
+                                <h:outputText value="#{item.t00Medico}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="T01Factura"/>
+                                </f:facet>
+                                <h:outputText value="#{item.t01Factura}"/>
+                            </p:column>
+                        </p:dataTable>
+
+                    </h:form>
+
+
+
+
+                </p:panel>
+            </div>  
+        </div>  
+
+        <p:separator > 
+        </p:separator > 
+    </ui:define>
+
+</ui:composition>
+
+
+
