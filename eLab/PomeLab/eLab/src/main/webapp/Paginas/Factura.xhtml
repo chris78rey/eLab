@@ -131,7 +131,7 @@
                             <div class="ui-panelgrid-cell ui-grid-col-2">
                                 <p:commandButton 
                                     value="Actualizar Datos" 
-                                    id="ajax" 
+
                                     process="@form"
                                     update="@all" 
                                     actionListener="#{factura.buttonAction1}" 
@@ -154,7 +154,7 @@
                     <div class="EmptyBox10"></div>
 
                     <h:form id="f3">
-                       
+
                         <div class="ui-grid-row">  
                             <div class="ui-panelgrid-cell ui-grid-col-2">
                                 <p:outputLabel value="NumeroFactura:"  />
@@ -172,7 +172,26 @@
                                             showOn="button"/>
                             </div>  
                         </div>  
+                        <div class="EmptyBox10"></div>
+                        <div class="EmptyBox10"></div>
+                        
+                        <div class="ui-grid-row">  
+                            <div class="ui-panelgrid-cell ui-grid-col-2">
+                                <p:commandButton 
+                                    value="Grabar factura" 
 
+                                    process="@form"
+                                    update="@form" 
+                                    actionListener="#{factura.buttonAction3}" 
+                                    styleClass="ui-priority-primary" />
+                            </div> 
+                            <div class="ui-panelgrid-cell ui-grid-col-4">
+                            </div>  
+                            <div class="ui-panelgrid-cell ui-grid-col-2">
+                            </div>  
+                            <div class="ui-panelgrid-cell ui-grid-col-4">
+                            </div>  
+                        </div>  
 
                     </h:form>
 

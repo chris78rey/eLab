@@ -5,6 +5,8 @@
  */
 package com.crrb.web.lab.paquetes.elab.sessionBeans.personalizados;
 
+import com.crrb.web.lab.paquetes.elab.entidades.T00Cliente;
+import com.crrb.web.lab.paquetes.elab.entidades.T00Cliente_;
 import com.crrb.web.lab.paquetes.elab.entidades.T00Persona;
 import com.crrb.web.lab.paquetes.elab.entidades.T00Persona_;
 import com.crrb.web.lab.paquetes.elab.entidades.T01Factura;
@@ -47,12 +49,12 @@ public class LogicaNegocio {
         StringBuilder SQLNative = new StringBuilder();
         SQLNative.append("SELECT  distinct  ");
         SQLNative.append("       V_MAPPING.NUMERO_FACTURA   ");
-        SQLNative.append("  FROM V_MAPPING   ");
+        SQLNative.append("  FROM T01_FACTURA V_MAPPING  ");
         SQLNative.append(" WHERE V_MAPPING.NUMERO_FACTURA LIKE '%").append(numerofact.toUpperCase()).append("%'   ");
 
         Query query = em.createNativeQuery(SQLNative.toString());
 
-        List<String> results = query.getResultList();
+        List<String> results = query.setMaxResults(3).getResultList();
         return results;
     }
 
@@ -91,6 +93,15 @@ public class LogicaNegocio {
         CriteriaQuery<T01FacturaDetalle> cq = cb.createQuery(T01FacturaDetalle.class);
         Root<T01FacturaDetalle> root = cq.from(T01FacturaDetalle.class);
         cq.where(cb.equal(root.get(T01FacturaDetalle_.t01Factura), par));
+        List resultList = em.createQuery(cq).setHint("eclipselink.refresh", "true").getResultList();
+        return resultList;
+    }
+
+    public List<T00Cliente> findEsCliente(T00Persona par) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<T00Cliente> cq = cb.createQuery(T00Cliente.class);
+        Root<T00Cliente> root = cq.from(T00Cliente.class);
+        cq.where(cb.equal(root.get(T00Cliente_.id), par.getId()));
         List resultList = em.createQuery(cq).setHint("eclipselink.refresh", "true").getResultList();
         return resultList;
     }

@@ -84,6 +84,6 @@
         <mime-type>image/svg+xml</mime-type>
     </mime-mapping>
     <welcome-file-list>
-        <welcome-file>dashboard.xhtml</welcome-file>
+        <welcome-file>Paginas/Factura.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>

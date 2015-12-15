@@ -16,6 +16,7 @@ import com.crrb.web.lab.paquetes.elab.sessionBeans.personalizados.LogicaNegocio;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
@@ -29,23 +30,23 @@ import javax.faces.event.AjaxBehaviorEvent;
 @Named(value = "factura")
 @SessionScoped
 public class Factura implements Serializable {
-    
+
     @EJB
     private T00PersonaFacade t00PersonaFacade;
-    
+
     @EJB
     private T00ClienteFacade t00ClienteFacade;
-    
+
     @EJB
     private LogicaNegocio logicaNegocio;
-    
+
     @EJB
     private T01FacturaFacade t01FacturaFacade;
     private List<T01Factura> facturas = new ArrayList<>();
     private T01Factura facturaObj = new T01Factura();
-    
+
     private List<T01FacturaDetalle> findDetalleFactura = new ArrayList<>();
-    
+
     private T00Cliente cliente = new T00Cliente();
     private T00Persona persona = new T00Persona();
 
@@ -54,16 +55,16 @@ public class Factura implements Serializable {
      */
     public Factura() {
     }
-    
+
     public List<T01Factura> findByNumeroFactura(String par) {
         return logicaNegocio.findByNumeroFactura(par);
     }
-    
+
     public void buttonAction(ActionEvent actionEvent) {
         //buscar
         String numeroFactura = facturaObj.getNumeroFactura();
         facturas = findByNumeroFactura(facturaObj.getNumeroFactura());
-        
+
         if (!facturas.isEmpty()) {
             facturas.stream().forEach((factura1) -> {
                 setFacturaObj(factura1);
@@ -76,48 +77,83 @@ public class Factura implements Serializable {
             facturaObj = new T01Factura();
             facturaObj.setNumeroFactura(numeroFactura);
         }
-        
+
     }
-    
+
     public void buttonAction2(ActionEvent actionEvent) {
         System.out.println("actionEvent = " + actionEvent);
         facturas = new ArrayList<>();
         facturaObj = new T01Factura();
         findDetalleFactura = new ArrayList<>();
-        
+
         cliente = new T00Cliente();
         persona = new T00Persona();
-        
+
     }
-    
+
     private void limpiaPantalla() {
         setFacturaObj(new T01Factura());
         setPersona(new T00Persona());
         setCliente(new T00Cliente());
         findDetalleFactura = new ArrayList<>();
     }
-    
+
     public List<T01Factura> findAll() {
         return t01FacturaFacade.findAll();
     }
-    
+
     public List<String> completeText(String query) {
         List<String> lista = logicaNegocio.listByNumeroFactura(query);
         return lista;
     }
-    
+
     public void buttonAction1(ActionEvent actionEvent) {
         //buscar
         t00PersonaFacade.edit(persona);
-        
+
         List<T00Persona> findPersonaByCC = logicaNegocio.findPersonaByCC(persona.getCcRucPasaporte());
         for (T00Persona t00Persona : findPersonaByCC) {
             persona = t00Persona;
         }
-        
+
         cliente.setId(persona.getId());
         t00ClienteFacade.edit(cliente);
-        
+
+    }
+
+    public void buttonAction3(ActionEvent actionEvent) {
+
+        System.out.println("actionEvent = " + persona.getApellidos());
+
+        List<T00Cliente> findEsCliente = logicaNegocio.findEsCliente(persona);
+        if (facturaObj.getId() == null) {
+            facturaObj.setId(BigDecimal.ONE);
+        }
+
+        facturaObj.setEstado("A");
+        System.out.println("facturaObj.getFecha() = " + facturaObj.getFecha());
+        System.out.println("facturaObj.getFecha() = " + facturaObj.getNumeroFactura().toUpperCase());
+
+        if (findEsCliente.isEmpty()) {
+            cliente = new T00Cliente();
+            cliente.setId(persona.getId());
+            t00ClienteFacade.create(cliente);
+        } else {
+            findEsCliente.stream().forEach((t00Cliente) -> {
+                cliente = t00Cliente;
+            });
+        }
+        facturaObj.setT00Cliente(cliente);
+        facturaObj.setNumeroFactura(facturaObj.getNumeroFactura().toUpperCase());
+
+        t01FacturaFacade.edit(facturaObj);
+        facturas = findByNumeroFactura(facturaObj.getNumeroFactura().toUpperCase());
+
+        facturas.stream().forEach((fac) -> {
+            facturaObj = fac;
+        });
+        System.out.println("facturaObj = " + facturaObj.getId());
+
     }
 
     /**
@@ -148,18 +184,18 @@ public class Factura implements Serializable {
     public void setFacturaObj(T01Factura facturaObj) {
         this.facturaObj = facturaObj;
     }
-    
+
     public List<T01Factura> findFacturaByNumeroFactura(String numeroFactura) {
         return logicaNegocio.findFacturaByNumeroFactura(numeroFactura);
     }
-    
+
     public List<String> completeText1(String query) {
         List<String> lista = logicaNegocio.findDNI(query);
         return lista;
     }
-    
+
     public void listen1(AjaxBehaviorEvent event) {
-        
+
         String ccRucPasaporte = persona.getCcRucPasaporte();
         List<T00Persona> findPersonaByCC = logicaNegocio.findPersonaByCC(ccRucPasaporte);
         if (findPersonaByCC.size() != 0) {
@@ -170,7 +206,7 @@ public class Factura implements Serializable {
             persona = new T00Persona();
             persona.setCcRucPasaporte(ccRucPasaporte);
         }
-        
+
     }
 
     /**
@@ -214,5 +250,5 @@ public class Factura implements Serializable {
     public void setFindDetalleFactura(List<T01FacturaDetalle> findDetalleFactura) {
         this.findDetalleFactura = findDetalleFactura;
     }
-    
+
 }
