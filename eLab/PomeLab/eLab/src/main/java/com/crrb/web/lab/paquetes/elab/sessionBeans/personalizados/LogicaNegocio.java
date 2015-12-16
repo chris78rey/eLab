@@ -7,12 +7,18 @@ package com.crrb.web.lab.paquetes.elab.sessionBeans.personalizados;
 
 import com.crrb.web.lab.paquetes.elab.entidades.T00Cliente;
 import com.crrb.web.lab.paquetes.elab.entidades.T00Cliente_;
+import com.crrb.web.lab.paquetes.elab.entidades.T00Medico;
 import com.crrb.web.lab.paquetes.elab.entidades.T00Persona;
 import com.crrb.web.lab.paquetes.elab.entidades.T00Persona_;
 import com.crrb.web.lab.paquetes.elab.entidades.T01Factura;
 import com.crrb.web.lab.paquetes.elab.entidades.T01FacturaDetalle;
 import com.crrb.web.lab.paquetes.elab.entidades.T01FacturaDetalle_;
 import com.crrb.web.lab.paquetes.elab.entidades.T01Factura_;
+import com.crrb.web.lab.paquetes.elab.entidades.VClasifArbol;
+import com.crrb.web.lab.paquetes.elab.entidades.VClasifArbol_;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -21,6 +27,7 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import sun.nio.cs.ext.Big5;
 
 /**
  *
@@ -105,4 +112,33 @@ public class LogicaNegocio {
         List resultList = em.createQuery(cq).setHint("eclipselink.refresh", "true").getResultList();
         return resultList;
     }
+
+    public List<T00Persona> findMedicosQueRecomiendan() {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<T00Medico> cq = cb.createQuery(T00Medico.class);
+        Root<T00Medico> root = cq.from(T00Medico.class);
+
+        List<T00Medico> resultList = em.createQuery(cq).setHint("eclipselink.refresh", "true").getResultList();
+        List<T00Persona> personas = new ArrayList<T00Persona>();
+
+        T00Persona persona = new T00Persona();
+
+        for (T00Medico t00Medico : resultList) {
+            persona = t00Medico.getT00Persona();
+            personas.add(persona);
+        }
+
+        return personas;
+    }
+
+    public List<VClasifArbol> findArbolClasif() {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<VClasifArbol> cq = cb.createQuery(VClasifArbol.class);
+        Root<VClasifArbol> root = cq.from(VClasifArbol.class);
+      
+        List resultList;
+        resultList = em.createQuery(cq).setHint("eclipselink.refresh", "true").getResultList();
+        return resultList;
+    }
+
 }

@@ -9,7 +9,9 @@ import com.crrb.web.lab.paquetes.elab.entidades.T00Cliente;
 import com.crrb.web.lab.paquetes.elab.entidades.T00Persona;
 import com.crrb.web.lab.paquetes.elab.entidades.T01Factura;
 import com.crrb.web.lab.paquetes.elab.entidades.T01FacturaDetalle;
+import com.crrb.web.lab.paquetes.elab.entidades.VClasifArbol;
 import com.crrb.web.lab.paquetes.elab.sessionBeans.T00ClienteFacade;
+import com.crrb.web.lab.paquetes.elab.sessionBeans.T00MedicoFacade;
 import com.crrb.web.lab.paquetes.elab.sessionBeans.T00PersonaFacade;
 import com.crrb.web.lab.paquetes.elab.sessionBeans.T01FacturaFacade;
 import com.crrb.web.lab.paquetes.elab.sessionBeans.personalizados.LogicaNegocio;
@@ -19,6 +21,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.AjaxBehaviorEvent;
@@ -32,6 +35,9 @@ import javax.faces.event.AjaxBehaviorEvent;
 public class Factura implements Serializable {
 
     @EJB
+    private T00MedicoFacade t00MedicoFacade;
+
+    @EJB
     private T00PersonaFacade t00PersonaFacade;
 
     @EJB
@@ -42,8 +48,23 @@ public class Factura implements Serializable {
 
     @EJB
     private T01FacturaFacade t01FacturaFacade;
+
+    private List<VClasifArbol> clasifArbols = new ArrayList<>();
+
+    public List<VClasifArbol> findArbolClasif() {
+        return logicaNegocio.findArbolClasif();
+    }
+
     private List<T01Factura> facturas = new ArrayList<>();
     private T01Factura facturaObj = new T01Factura();
+
+    private List<T00Persona> personas = new ArrayList<>();
+
+    public List<T00Persona> findMedicosQueRecomiendan() {
+        return logicaNegocio.findMedicosQueRecomiendan();
+    }
+
+    private String aplicaDescuento = "No";
 
     private List<T01FacturaDetalle> findDetalleFactura = new ArrayList<>();
 
@@ -54,6 +75,12 @@ public class Factura implements Serializable {
      * Creates a new instance of Factura
      */
     public Factura() {
+    }
+
+    @PostConstruct
+    private void init() {
+        personas = findMedicosQueRecomiendan();
+        clasifArbols = findArbolClasif();
     }
 
     public List<T01Factura> findByNumeroFactura(String par) {
@@ -249,6 +276,48 @@ public class Factura implements Serializable {
      */
     public void setFindDetalleFactura(List<T01FacturaDetalle> findDetalleFactura) {
         this.findDetalleFactura = findDetalleFactura;
+    }
+
+    /**
+     * @return the aplicaDescuento
+     */
+    public String getAplicaDescuento() {
+        return aplicaDescuento;
+    }
+
+    /**
+     * @param aplicaDescuento the aplicaDescuento to set
+     */
+    public void setAplicaDescuento(String aplicaDescuento) {
+        this.aplicaDescuento = aplicaDescuento;
+    }
+
+    /**
+     * @return the personas
+     */
+    public List<T00Persona> getPersonas() {
+        return personas;
+    }
+
+    /**
+     * @param personas the personas to set
+     */
+    public void setPersonas(List<T00Persona> personas) {
+        this.personas = personas;
+    }
+
+    /**
+     * @return the clasifArbols
+     */
+    public List<VClasifArbol> getClasifArbols() {
+        return clasifArbols;
+    }
+
+    /**
+     * @param clasifArbols the clasifArbols to set
+     */
+    public void setClasifArbols(List<VClasifArbol> clasifArbols) {
+        this.clasifArbols = clasifArbols;
     }
 
 }

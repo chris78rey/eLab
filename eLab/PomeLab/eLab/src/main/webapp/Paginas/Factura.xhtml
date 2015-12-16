@@ -174,7 +174,7 @@
                         </div>  
                         <div class="EmptyBox10"></div>
                         <div class="EmptyBox10"></div>
-                        
+
                         <div class="ui-grid-row">  
                             <div class="ui-panelgrid-cell ui-grid-col-2">
                                 <p:commandButton 
@@ -195,7 +195,54 @@
 
                     </h:form>
 
+                    <p:panel header="Agregar Items">
 
+                        <div class="ui-grid-row">  
+                            <div class="ui-panelgrid-cell ui-grid-col-2">
+                                <p:outputLabel value="Descuento:"  />
+                            </div> 
+                            <div class="ui-panelgrid-cell ui-grid-col-4">
+                                <h:panelGrid columns="2"   cellpadding="5">                                    
+                                    <p:selectOneRadio layout="pageDirection" value="#{factura.aplicaDescuento}">
+                                        <f:selectItem itemLabel="No" itemValue="No"  />
+                                        <f:selectItem itemLabel="Sí" itemValue="Sí" />
+                                    </p:selectOneRadio>
+                                </h:panelGrid>
+                            </div>  
+                            <div class="ui-panelgrid-cell ui-grid-col-2">
+                                <p:outputLabel value="Recomienda:"  />
+                            </div>  
+                            <div class="ui-panelgrid-cell ui-grid-col-4">
+                                <p:selectOneMenu id="itemcomponente" >
+                                    <f:selectItem itemLabel="Select One..........."  noSelectionOption="" />
+                                    <f:selectItems  value="#{factura.personas}" var="item" itemLabel="#{item.apellidos} #{item.nombres}" itemValue="#{item.id}"  />
+
+                                </p:selectOneMenu>
+                            </div>  
+                        </div>  
+
+
+
+                        <div class="ui-grid-row">  
+                            <div class="ui-panelgrid-cell ui-grid-col-2">
+                                <p:outputLabel value="Item:"  />
+                            </div> 
+                            <div class="ui-panelgrid-cell ui-grid-col-4">
+                                <p:selectOneMenu id="itt" >
+                                    <f:selectItem itemLabel="Select One..........."  noSelectionOption="" />
+                                    <f:selectItems  value="#{factura.clasifArbols}" var="item" itemLabel="#{item.s}" itemValue="#{item.id}"  />
+
+                                </p:selectOneMenu>
+                            </div>  
+                            <div class="ui-panelgrid-cell ui-grid-col-2">
+                            </div>  
+                            <div class="ui-panelgrid-cell ui-grid-col-4">
+                            </div>  
+                        </div>  
+
+
+
+                    </p:panel>
 
                     <h:form id="f4">
 
@@ -264,14 +311,17 @@
 
 
                 </p:panel>
+
+
             </div>  
         </div>  
 
         <p:separator > 
         </p:separator > 
+
+
     </ui:define>
 
 </ui:composition>
-
 
 
