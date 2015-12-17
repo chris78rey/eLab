@@ -118,6 +118,19 @@ public class Factura implements Serializable {
 
     }
 
+    public void buttonActionRefreCC(ActionEvent actionEvent) {
+        String ccRucPasaporte = persona.getCcRucPasaporte();
+        List<T00Persona> findPersonaByCC = logicaNegocio.findPersonaByCC(ccRucPasaporte);
+        if (!findPersonaByCC.isEmpty()) {
+            findPersonaByCC.stream().forEach((t00Persona) -> {
+                persona = t00Persona;
+            });
+        } else {
+            persona = new T00Persona();
+            persona.setCcRucPasaporte(ccRucPasaporte);
+        }
+    }
+
     private void limpiaPantalla() {
         setFacturaObj(new T01Factura());
         setPersona(new T00Persona());

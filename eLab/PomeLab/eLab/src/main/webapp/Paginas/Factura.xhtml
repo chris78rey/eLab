@@ -49,8 +49,14 @@
                             <div class="ui-panelgrid-cell ui-grid-col-4"> 
 
                                 <p:autoComplete id="acSimple"  value="#{factura.persona.ccRucPasaporte}"   completeMethod="#{factura.completeText1}" >
-                                    <f:ajax event="blur" render="@form :f3:nbs"  listener="#{factura.listen1(event)}"/>
+                                    <!--<f:ajax event="blur" render="@form :f3:nbs"  listener="#{factura.listen1(event)}"/>-->
                                 </p:autoComplete>
+                                <p:commandButton 
+                                    value="..."
+                                    
+                                    update="@all" 
+                                    actionListener="#{factura.buttonActionRefreCC}" 
+                                    />
 
                             </div>  
                             <div class="ui-panelgrid-cell ui-grid-col-2">
@@ -174,6 +180,9 @@
                         </div>  
                         <div class="EmptyBox10"></div>
                         <div class="EmptyBox10"></div>
+                        
+                        
+                        
 
                         <div class="ui-grid-row">  
                             <div class="ui-panelgrid-cell ui-grid-col-2">
