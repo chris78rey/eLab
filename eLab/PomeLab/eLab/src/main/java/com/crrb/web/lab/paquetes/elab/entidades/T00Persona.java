@@ -12,10 +12,13 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -30,6 +33,8 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "T00Persona.findAll", query = "SELECT t FROM T00Persona t")})
 public class T00Persona implements Serializable {
 
+    @SequenceGenerator(name = "modulos_T00_SOCIOS_SEQ", sequenceName = "IMALAB.T00_SOCIOS_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "modulos_T00_SOCIOS_SEQ")
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
@@ -173,5 +178,5 @@ public class T00Persona implements Serializable {
     public String toString() {
         return "com.crrb.web.lab.paquetes.elab.entidades.T00Persona[ id=" + id + " ]";
     }
-    
+
 }

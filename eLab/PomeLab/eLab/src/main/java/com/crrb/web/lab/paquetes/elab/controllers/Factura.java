@@ -200,10 +200,15 @@ public class Factura implements Serializable {
     }
 
     private void limpiaPantalla() {
+        clasifconvalores = new VClasifArbol();
+
         setFacturaObj(new T01Factura());
         setPersona(new T00Persona());
         setCliente(new T00Cliente());
         findDetalleFactura = new ArrayList<>();
+        medico = new T00Medico();
+        clasifconvalores = new VClasifArbol();
+
     }
 
     public List<T01Factura> findAll() {
@@ -223,9 +228,13 @@ public class Factura implements Serializable {
         for (T00Persona t00Persona : findPersonaByCC) {
             persona = t00Persona;
         }
+        //si la persona ya es cliente no se crea el id de cliente
+        T00Cliente find = t00ClienteFacade.find(persona.getId());
 
-        cliente.setId(persona.getId());
-        t00ClienteFacade.edit(cliente);
+        if (find == null) {
+            cliente.setId(persona.getId());
+            t00ClienteFacade.edit(cliente);
+        }
 
     }
 
@@ -236,17 +245,15 @@ public class Factura implements Serializable {
     }
 
     public void buttonAction3(ActionEvent actionEvent) {
-
-        System.out.println("actionEvent = " + persona.getApellidos());
+        buttonAction1(actionEvent);
 
         List<T00Cliente> findEsCliente = logicaNegocio.findEsCliente(persona);
-        if (facturaObj.getId() == null) {
-            facturaObj.setId(BigDecimal.ONE);
-        }
+//     
+//        if (facturaObj.getId() == null) {
+//            facturaObj.setId(BigDecimal.ONE);
+//        }
 
         facturaObj.setEstado("A");
-        System.out.println("facturaObj.getFecha() = " + facturaObj.getFecha());
-        System.out.println("facturaObj.getFecha() = " + facturaObj.getNumeroFactura().toUpperCase());
 
         if (findEsCliente.isEmpty()) {
             cliente = new T00Cliente();
@@ -257,6 +264,7 @@ public class Factura implements Serializable {
                 cliente = t00Cliente;
             });
         }
+
         facturaObj.setT00Cliente(cliente);
         facturaObj.setNumeroFactura(facturaObj.getNumeroFactura().toUpperCase());
 
@@ -266,7 +274,7 @@ public class Factura implements Serializable {
         facturas.stream().forEach((fac) -> {
             facturaObj = fac;
         });
-        System.out.println("facturaObj = " + facturaObj.getId());
+//        System.out.println("facturaObj = " + facturaObj.getId());
 
     }
 

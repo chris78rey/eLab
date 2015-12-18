@@ -27,20 +27,44 @@
                             <div class="ui-panelgrid-cell ui-grid-col-2">
                                 <p:commandButton value="Buscar" 
                                                  process="@form" 
-                                                 update=":f3,:f2,:f4,:f3:numeroFactura,@form"  
+                                                 update=":f2,:f4,:f2:numeroFactura,@form"  
                                                  actionListener="#{factura.buttonAction}"  />
                             </div>  
                             <div class="ui-panelgrid-cell ui-grid-col-4">
                                 <p:commandButton value="Nuevo" 
                                                  process="@form" 
-                                                 update=":f3,:f2,:f4,:f1"  
+                                                 update=":f1,:f2,:f4"  
                                                  actionListener="#{factura.buttonAction2}"  />
                             </div>  
                         </div>
                     </h:form>
                     <div class="EmptyBox20"></div>
                     <div class="EmptyBox20"></div>
+
+
                     <h:form id="f2">
+                        <div class="ui-grid-row">  
+                            <div class="ui-panelgrid-cell ui-grid-col-2">
+                                <p:outputLabel value="NumeroFactura:"  />
+                            </div> 
+                            <div class="ui-panelgrid-cell ui-grid-col-4">
+                                <p:inputText id="numeroFactura" value="#{factura.facturaObj.numeroFactura}" title="NumeroFactura" />
+                            </div>  
+                            <div class="ui-panelgrid-cell ui-grid-col-2">
+                                <p:outputLabel value="Fecha:"  />
+                            </div>  
+                            <div class="ui-panelgrid-cell ui-grid-col-4">
+                                <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy" 
+                                            value="#{factura.facturaObj.fecha}" 
+                                            title="Fecha:"  
+                                            showOn="button"/>
+                            </div>  
+                        </div>  
+                        <div class="EmptyBox10"></div>
+                        <div class="EmptyBox10"></div>
+
+
+
                         <div class="ui-grid-row">  
                             <div class="ui-panelgrid-cell ui-grid-col-2">
                                 <p:outputLabel value="CcRucPasaporte:" />
@@ -49,10 +73,11 @@
                             <div class="ui-panelgrid-cell ui-grid-col-4"> 
 
                                 <p:autoComplete id="acSimple"  value="#{factura.persona.ccRucPasaporte}"   completeMethod="#{factura.completeText1}" >
-                                    <!--<f:ajax event="blur" render="@form :f3:nbs"  listener="#{factura.listen1(event)}"/>-->
+
                                 </p:autoComplete>
                                 <p:commandButton 
                                     value="..."
+                                    process="@form"
 
                                     update="@form" 
                                     actionListener="#{factura.buttonActionRefreCC}" 
@@ -135,13 +160,7 @@
                         </div>  
                         <div class="ui-grid-row">  
                             <div class="ui-panelgrid-cell ui-grid-col-2">
-                                <p:commandButton 
-                                    value="Actualizar Datos" 
 
-                                    process="@form"
-                                    update="@form" 
-                                    actionListener="#{factura.buttonAction1}" 
-                                    styleClass="ui-priority-primary" />
                             </div> 
                             <div class="ui-panelgrid-cell ui-grid-col-4">
                             </div>  
@@ -151,36 +170,13 @@
                             </div>  
                         </div>  
 
-                    </h:form>
 
 
 
 
-                    <div class="EmptyBox10"></div>
-                    <div class="EmptyBox10"></div>
 
-                    <h:form id="f3">
-
-                        <div class="ui-grid-row">  
-                            <div class="ui-panelgrid-cell ui-grid-col-2">
-                                <p:outputLabel value="NumeroFactura:"  />
-                            </div> 
-                            <div class="ui-panelgrid-cell ui-grid-col-4">
-                                <p:inputText id="numeroFactura" value="#{factura.facturaObj.numeroFactura}" title="NumeroFactura" />
-                            </div>  
-                            <div class="ui-panelgrid-cell ui-grid-col-2">
-                                <p:outputLabel value="Fecha:"  />
-                            </div>  
-                            <div class="ui-panelgrid-cell ui-grid-col-4">
-                                <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy" 
-                                            value="#{factura.facturaObj.fecha}" 
-                                            title="Fecha:"  
-                                            showOn="button"/>
-                            </div>  
-                        </div>  
                         <div class="EmptyBox10"></div>
                         <div class="EmptyBox10"></div>
-
 
 
 
@@ -192,7 +188,7 @@
                                     process="@form"
                                     update="@form" 
                                     actionListener="#{factura.buttonAction3}" 
-                                    styleClass="ui-priority-primary" />
+                                    />
                             </div> 
                             <div class="ui-panelgrid-cell ui-grid-col-4">
                             </div>  
@@ -201,6 +197,8 @@
                             <div class="ui-panelgrid-cell ui-grid-col-4">
                             </div>  
                         </div>  
+                        <div class="EmptyBox10"></div>
+                        <div class="EmptyBox10"></div>
 
                     </h:form>
                     <h:form id="f33">
@@ -244,7 +242,7 @@
                                     <p:commandButton 
                                         value="Agregar" 
                                         process="@form"
-                                        update=":f4:dfact,@form" 
+                                        update=":f4:dfact,@form,:f4" 
                                         actionListener="#{factura.buttonActionAgregar}" 
 
                                         />

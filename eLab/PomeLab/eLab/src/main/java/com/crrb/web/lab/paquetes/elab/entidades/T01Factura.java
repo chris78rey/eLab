@@ -13,12 +13,15 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -34,6 +37,9 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "T01Factura.findAll", query = "SELECT t FROM T01Factura t")})
 public class T01Factura implements Serializable {
+
+    @SequenceGenerator(name = "modulos_T01_FACTURA_SEQ", sequenceName = "IMALAB.T01_FACTURA_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "modulos_T01_FACTURA_SEQ")
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -84,7 +90,8 @@ public class T01Factura implements Serializable {
     }
 
     public void setNumeroFactura(String numeroFactura) {
-        this.numeroFactura = numeroFactura;
+
+        this.numeroFactura = numeroFactura.toUpperCase();
     }
 
     public Date getFecha() {
@@ -143,5 +150,5 @@ public class T01Factura implements Serializable {
     public String toString() {
         return "com.crrb.web.lab.paquetes.elab.entidades.T01Factura[ id=" + id + " ]";
     }
-    
+
 }

@@ -171,12 +171,12 @@ public class LogicaNegocio {
         SQLNative.append("  SELECT UPPER(T00_CLASIFICADOR.DESCRIPCION)   ");
         SQLNative.append("    FROM IMALAB.T00_CLASIFICADOR   ");
         SQLNative.append("   WHERE T00_CLASIFICADOR.CON_DESCUENTO IS NOT NULL   ");
-        SQLNative.append("   AND UPPER(T00_CLASIFICADOR.DESCRIPCION) LIKE '%" + parametro.toUpperCase() + "%'  ");
+        SQLNative.append("   AND UPPER(T00_CLASIFICADOR.DESCRIPCION) LIKE '%").append(parametro.toUpperCase()).append("%'  ");
         SQLNative.append("ORDER BY T00_CLASIFICADOR.DESCRIPCION   ");
 
         Query query = em.createNativeQuery(SQLNative.toString());
 
-        List<String> results = query.setMaxResults(5).getResultList();
+        List<String> results = query.setMaxResults(200).getResultList();
         return results;
 
     }
