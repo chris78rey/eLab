@@ -5,6 +5,8 @@
  */
 package com.crrb.web.lab.paquetes.elab.sessionBeans.personalizados;
 
+import com.crrb.web.lab.paquetes.elab.entidades.T00Clasificador;
+import com.crrb.web.lab.paquetes.elab.entidades.T00Clasificador_;
 import com.crrb.web.lab.paquetes.elab.entidades.T00Cliente;
 import com.crrb.web.lab.paquetes.elab.entidades.T00Cliente_;
 import com.crrb.web.lab.paquetes.elab.entidades.T00Medico;
@@ -16,8 +18,6 @@ import com.crrb.web.lab.paquetes.elab.entidades.T01FacturaDetalle_;
 import com.crrb.web.lab.paquetes.elab.entidades.T01Factura_;
 import com.crrb.web.lab.paquetes.elab.entidades.VClasifArbol;
 import com.crrb.web.lab.paquetes.elab.entidades.VClasifArbol_;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -26,8 +26,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import sun.nio.cs.ext.Big5;
 
 /**
  *
@@ -44,6 +44,7 @@ public class LogicaNegocio {
     }
 
     public List<T01Factura> findFacturaByNumeroFactura(String numeroFactura) {
+        numeroFactura = (numeroFactura == null) ? "" : numeroFactura;
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<T01Factura> cq = cb.createQuery(T01Factura.class);
         Root<T01Factura> root = cq.from(T01Factura.class);
@@ -53,6 +54,7 @@ public class LogicaNegocio {
     }
 
     public List<String> listByNumeroFactura(String numerofact) {
+        numerofact = (numerofact == null) ? "" : numerofact;
         StringBuilder SQLNative = new StringBuilder();
         SQLNative.append("SELECT  distinct  ");
         SQLNative.append("       V_MAPPING.NUMERO_FACTURA   ");
@@ -66,6 +68,7 @@ public class LogicaNegocio {
     }
 
     public List<T01Factura> findByNumeroFactura(String par) {
+        par = (par == null) ? "" : par;
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<T01Factura> cq = cb.createQuery(T01Factura.class);
         Root<T01Factura> root = cq.from(T01Factura.class);
@@ -75,6 +78,7 @@ public class LogicaNegocio {
     }
 
     public List<String> findDNI(String parametro) {
+        parametro = (parametro == null) ? "" : parametro;
         StringBuilder SQLNative = new StringBuilder();
         SQLNative.append("SELECT CC_RUC_PASAPORTE "
                 + "FROM IMALAB.T00_PERSONA "
@@ -87,6 +91,7 @@ public class LogicaNegocio {
     }
 
     public List<T00Persona> findPersonaByCC(String par) {
+        par = (par == null) ? "" : par;
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<T00Persona> cq = cb.createQuery(T00Persona.class);
         Root<T00Persona> root = cq.from(T00Persona.class);
@@ -96,6 +101,7 @@ public class LogicaNegocio {
     }
 
     public List<T01FacturaDetalle> findDetalleFactura(T01Factura par) {
+        par = (par == null) ? new T01Factura() : par;
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<T01FacturaDetalle> cq = cb.createQuery(T01FacturaDetalle.class);
         Root<T01FacturaDetalle> root = cq.from(T01FacturaDetalle.class);
@@ -135,9 +141,52 @@ public class LogicaNegocio {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<VClasifArbol> cq = cb.createQuery(VClasifArbol.class);
         Root<VClasifArbol> root = cq.from(VClasifArbol.class);
-      
+
         List resultList;
         resultList = em.createQuery(cq).setHint("eclipselink.refresh", "true").getResultList();
+        return resultList;
+    }
+
+    public List<VClasifArbol> findByTextoItem(String par) {
+        par = (par == null) ? "" : par;
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<VClasifArbol> cq = cb.createQuery(VClasifArbol.class);
+        Root<VClasifArbol> root = cq.from(VClasifArbol.class);
+
+        List<Predicate> predicatesOR = new ArrayList<Predicate>();
+
+        predicatesOR.add(cb.like(root.get(VClasifArbol_.s), "%" + par.toUpperCase() + "%"));
+        predicatesOR.add(cb.isNotNull(root.get(VClasifArbol_.sinDescuento)));
+
+        cq.where(cb.and(predicatesOR.toArray(new Predicate[predicatesOR.size()])));
+        List resultList = em.createQuery(cq).setHint("eclipselink.refresh", "true").getResultList();
+        return resultList;
+
+    }
+
+    public List<String> listadeItems(String parametro) {
+        parametro = (parametro == null) ? "%" : parametro;
+        StringBuilder SQLNative = new StringBuilder();
+        SQLNative.append("  SELECT UPPER(T00_CLASIFICADOR.DESCRIPCION)   ");
+        SQLNative.append("    FROM IMALAB.T00_CLASIFICADOR   ");
+        SQLNative.append("   WHERE T00_CLASIFICADOR.CON_DESCUENTO IS NOT NULL   ");
+        SQLNative.append("   AND UPPER(T00_CLASIFICADOR.DESCRIPCION) LIKE '%" + parametro.toUpperCase() + "%'  ");
+        SQLNative.append("ORDER BY T00_CLASIFICADOR.DESCRIPCION   ");
+
+        Query query = em.createNativeQuery(SQLNative.toString());
+
+        List<String> results = query.setMaxResults(5).getResultList();
+        return results;
+
+    }
+
+    public List<T00Clasificador> findClasificadorPorDescripcion(String par) {
+        par = (par == null) ? "" : par;
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<T00Clasificador> cq = cb.createQuery(T00Clasificador.class);
+        Root<T00Clasificador> root = cq.from(T00Clasificador.class);
+        cq.where(cb.equal(root.get(T00Clasificador_.descripcion), par.toUpperCase()));
+        List resultList = em.createQuery(cq).setHint("eclipselink.refresh", "true").getResultList();
         return resultList;
     }
 

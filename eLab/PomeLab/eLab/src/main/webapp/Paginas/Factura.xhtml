@@ -53,8 +53,8 @@
                                 </p:autoComplete>
                                 <p:commandButton 
                                     value="..."
-                                    
-                                    update="@all" 
+
+                                    update="@form" 
                                     actionListener="#{factura.buttonActionRefreCC}" 
                                     />
 
@@ -139,7 +139,7 @@
                                     value="Actualizar Datos" 
 
                                     process="@form"
-                                    update="@all" 
+                                    update="@form" 
                                     actionListener="#{factura.buttonAction1}" 
                                     styleClass="ui-priority-primary" />
                             </div> 
@@ -180,9 +180,9 @@
                         </div>  
                         <div class="EmptyBox10"></div>
                         <div class="EmptyBox10"></div>
-                        
-                        
-                        
+
+
+
 
                         <div class="ui-grid-row">  
                             <div class="ui-panelgrid-cell ui-grid-col-2">
@@ -203,59 +203,64 @@
                         </div>  
 
                     </h:form>
+                    <h:form id="f33">
+                        <p:panel header="Agregar Items">
 
-                    <p:panel header="Agregar Items">
+                            <div class="ui-grid-row">  
+                                <div class="ui-panelgrid-cell ui-grid-col-2">
+                                    <p:outputLabel value="Descuento:"  />
+                                </div> 
+                                <div class="ui-panelgrid-cell ui-grid-col-4">
+                                    <h:panelGrid columns="2"   cellpadding="5">                                    
+                                        <p:selectOneRadio layout="pageDirection" value="#{factura.aplicaDescuento}">
+                                            <f:selectItem itemLabel="No" itemValue="No"  />
+                                            <f:selectItem itemLabel="Sí" itemValue="Sí" />
+                                        </p:selectOneRadio>
+                                    </h:panelGrid>
+                                </div>  
+                                <div class="ui-panelgrid-cell ui-grid-col-2">
+                                    <p:outputLabel value="Recomienda:"  />
+                                </div>  
+                                <div class="ui-panelgrid-cell ui-grid-col-4">
+                                    <p:selectOneMenu id="itemcomponente" value="#{factura.medico.id}" >
+                                        <f:selectItem itemLabel="Select One..........."  noSelectionOption="true" />
+                                        <f:selectItems  value="#{factura.personas}" var="item" itemLabel="#{item.apellidos} #{item.nombres}" itemValue="#{item.id}"  />
 
-                        <div class="ui-grid-row">  
-                            <div class="ui-panelgrid-cell ui-grid-col-2">
-                                <p:outputLabel value="Descuento:"  />
+                                    </p:selectOneMenu>
+                                </div>  
+                            </div>  
+
+
+
+                            <div class="ui-grid-row">  
+                                <div class="ui-panelgrid-cell ui-grid-col-2">
+                                    <p:outputLabel value="Item:"  />
+                                </div> 
+                                <div class="ui-panelgrid-cell ui-grid-col-4">
+                                    <p:autoComplete size="45"  
+                                                    value="#{factura.clasifconvalores.s}" 
+                                                    completeMethod="#{factura.completeTextItem}" />
+                                </div>  
+                                <div class="ui-panelgrid-cell ui-grid-col-2">
+                                </div>  
+                                <div class="ui-panelgrid-cell ui-grid-col-4">
+                                    <p:commandButton 
+                                        value="Agregar" 
+                                        process="@form"
+                                        update="@form,@all" 
+                                        actionListener="#{factura.buttonActionAgregar}" 
+
+                                        />
+                                </div>  
                             </div> 
-                            <div class="ui-panelgrid-cell ui-grid-col-4">
-                                <h:panelGrid columns="2"   cellpadding="5">                                    
-                                    <p:selectOneRadio layout="pageDirection" value="#{factura.aplicaDescuento}">
-                                        <f:selectItem itemLabel="No" itemValue="No"  />
-                                        <f:selectItem itemLabel="Sí" itemValue="Sí" />
-                                    </p:selectOneRadio>
-                                </h:panelGrid>
-                            </div>  
-                            <div class="ui-panelgrid-cell ui-grid-col-2">
-                                <p:outputLabel value="Recomienda:"  />
-                            </div>  
-                            <div class="ui-panelgrid-cell ui-grid-col-4">
-                                <p:selectOneMenu id="itemcomponente" >
-                                    <f:selectItem itemLabel="Select One..........."  noSelectionOption="" />
-                                    <f:selectItems  value="#{factura.personas}" var="item" itemLabel="#{item.apellidos} #{item.nombres}" itemValue="#{item.id}"  />
-
-                                </p:selectOneMenu>
-                            </div>  
-                        </div>  
-
-
-
-                        <div class="ui-grid-row">  
-                            <div class="ui-panelgrid-cell ui-grid-col-2">
-                                <p:outputLabel value="Item:"  />
-                            </div> 
-                            <div class="ui-panelgrid-cell ui-grid-col-4">
-                                <p:selectOneMenu id="itt" >
-                                    <f:selectItem itemLabel="Select One..........."  noSelectionOption="" />
-                                    <f:selectItems  value="#{factura.clasifArbols}" var="item" itemLabel="#{item.s}" itemValue="#{item.id}"  />
-
-                                </p:selectOneMenu>
-                            </div>  
-                            <div class="ui-panelgrid-cell ui-grid-col-2">
-                            </div>  
-                            <div class="ui-panelgrid-cell ui-grid-col-4">
-                            </div>  
-                        </div>  
-
-
-
-                    </p:panel>
-
+                        </p:panel>
+                    </h:form>
+                    
+                    
+                    
                     <h:form id="f4">
 
-                        <p:dataTable value="#{factura.findDetalleFactura}" var="item">
+                        <p:dataTable id="dfact" value="#{factura.findDetalleFactura}" var="item">
                             <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="Id"/>

@@ -3,6 +3,7 @@
   <persistence-unit name="com.crrb.web.lab.paquetes_eLab_war_1.0-SNAPSHOTPU" transaction-type="JTA">
     <jta-data-source>jdbc/IMALAB</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <validation-mode>NONE</validation-mode>
     <properties/>
   </persistence-unit>
 </persistence>

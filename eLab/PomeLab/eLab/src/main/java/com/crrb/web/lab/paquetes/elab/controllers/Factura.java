@@ -5,7 +5,9 @@
  */
 package com.crrb.web.lab.paquetes.elab.controllers;
 
+import com.crrb.web.lab.paquetes.elab.entidades.T00Clasificador;
 import com.crrb.web.lab.paquetes.elab.entidades.T00Cliente;
+import com.crrb.web.lab.paquetes.elab.entidades.T00Medico;
 import com.crrb.web.lab.paquetes.elab.entidades.T00Persona;
 import com.crrb.web.lab.paquetes.elab.entidades.T01Factura;
 import com.crrb.web.lab.paquetes.elab.entidades.T01FacturaDetalle;
@@ -13,13 +15,16 @@ import com.crrb.web.lab.paquetes.elab.entidades.VClasifArbol;
 import com.crrb.web.lab.paquetes.elab.sessionBeans.T00ClienteFacade;
 import com.crrb.web.lab.paquetes.elab.sessionBeans.T00MedicoFacade;
 import com.crrb.web.lab.paquetes.elab.sessionBeans.T00PersonaFacade;
+import com.crrb.web.lab.paquetes.elab.sessionBeans.T01FacturaDetalleFacade;
 import com.crrb.web.lab.paquetes.elab.sessionBeans.T01FacturaFacade;
 import com.crrb.web.lab.paquetes.elab.sessionBeans.personalizados.LogicaNegocio;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -33,6 +38,14 @@ import javax.faces.event.AjaxBehaviorEvent;
 @Named(value = "factura")
 @SessionScoped
 public class Factura implements Serializable {
+
+
+
+    @EJB
+    private T00MedicoFacade t00MedicoFacade1;
+
+    @EJB
+    private T01FacturaDetalleFacade t01FacturaDetalleFacade;
 
     @EJB
     private T00MedicoFacade t00MedicoFacade;
@@ -48,6 +61,8 @@ public class Factura implements Serializable {
 
     @EJB
     private T01FacturaFacade t01FacturaFacade;
+
+    private T00Medico medico = new T00Medico();
 
     private List<VClasifArbol> clasifArbols = new ArrayList<>();
 
@@ -76,15 +91,68 @@ public class Factura implements Serializable {
      */
     public Factura() {
     }
+    private VClasifArbol clasifconvalores = new VClasifArbol();
 
     @PostConstruct
     private void init() {
         personas = findMedicosQueRecomiendan();
         clasifArbols = findArbolClasif();
+
+    }
+
+    List<T00Clasificador> listClasif = new ArrayList<>();
+
+    public List<T00Clasificador> getListClasif() {
+        return listClasif;
+    }
+
+    public List<T00Clasificador> findClasificadorPorDescripcion(String par) {
+        return logicaNegocio.findClasificadorPorDescripcion(par);
+    }
+
+    public List<String> listadeItems(String parametro) {
+        return logicaNegocio.listadeItems(parametro);
+    }
+
+    public List<String> completeTextItem(String query) {
+        List<String> listadeItems = listadeItems(query);
+        return listadeItems;
     }
 
     public List<T01Factura> findByNumeroFactura(String par) {
         return logicaNegocio.findByNumeroFactura(par);
+    }
+
+    public void buttonActionAgregar(ActionEvent actionEvent) {
+        listClasif = findClasificadorPorDescripcion(clasifconvalores.getS());
+        T00Clasificador listCla = new T00Clasificador();
+        for (Iterator<T00Clasificador> it = listClasif.iterator(); it.hasNext();) {
+            listCla = it.next();
+        }
+        T01FacturaDetalle facturaDetalle = new T01FacturaDetalle();
+        facturaDetalle.setCantidad(BigInteger.ONE);
+        facturaDetalle.setClasifDescri(clasifconvalores.getS());
+        facturaDetalle.setT00Clasificador(listCla);
+
+        medico = t00MedicoFacade1.find(medico.getId());
+        facturaDetalle.setT00Medico(medico);
+
+        facturaDetalle.setT01Factura(facturaObj);
+        facturaDetalle.setTieneDescuento(aplicaDescuento);
+
+        Double descuento = new Double("0");
+        if (aplicaDescuento.equalsIgnoreCase("No")) {
+            descuento = listCla.getSinDescuento();
+        } else {
+            descuento = listCla.getConDescuento();
+        }
+
+        facturaDetalle.setValor(descuento);
+        
+        t01FacturaDetalleFacade.create(facturaDetalle);
+        
+        findDetalleFactura = logicaNegocio.findDetalleFactura(facturaObj);
+
     }
 
     public void buttonAction(ActionEvent actionEvent) {
@@ -159,6 +227,12 @@ public class Factura implements Serializable {
         cliente.setId(persona.getId());
         t00ClienteFacade.edit(cliente);
 
+    }
+
+    private List<VClasifArbol> findByTextoItem = new ArrayList<>();
+
+    public List<VClasifArbol> findByTextoIte(String par) {
+        return logicaNegocio.findByTextoItem(par);
     }
 
     public void buttonAction3(ActionEvent actionEvent) {
@@ -333,4 +407,49 @@ public class Factura implements Serializable {
         this.clasifArbols = clasifArbols;
     }
 
+    /**
+     * @return the findByTextoItem
+     */
+    public List<VClasifArbol> getFindByTextoItem() {
+        return findByTextoItem;
+    }
+
+    /**
+     * @param findByTextoItem the findByTextoItem to set
+     */
+    public void setFindByTextoItem(List<VClasifArbol> findByTextoItem) {
+        this.findByTextoItem = findByTextoItem;
+    }
+
+    /**
+     * @return the clasifconvalores
+     */
+    public VClasifArbol getClasifconvalores() {
+        return clasifconvalores;
+    }
+
+    /**
+     * @param clasifconvalores the clasifconvalores to set
+     */
+    public void setClasifconvalores(VClasifArbol clasifconvalores) {
+        this.clasifconvalores = clasifconvalores;
+    }
+
+    /**
+     * @return the medico
+     */
+    public T00Medico getMedico() {
+        return medico;
+    }
+
+    /**
+     * @param medico the medico to set
+     */
+    public void setMedico(T00Medico medico) {
+        this.medico = medico;
+    }
+
+    /**
+     * @return the vClasifArbol
+     */
 }
