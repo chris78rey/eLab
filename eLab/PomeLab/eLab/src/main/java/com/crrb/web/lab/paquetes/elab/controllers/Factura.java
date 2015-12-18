@@ -24,6 +24,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -59,6 +60,7 @@ public class Factura implements Serializable {
 
     @EJB
     private T01FacturaFacade t01FacturaFacade;
+    private T01FacturaDetalle selected = new T01FacturaDetalle();
 
     private T00Medico medico;
 
@@ -99,6 +101,13 @@ public class Factura implements Serializable {
 
     }
 
+    public void destroy() {
+        selected.setEstado("I");
+        t01FacturaDetalleFacade.edit(selected);
+        findDetalleFactura = logicaNegocio.findDetalleFactura(facturaObj);
+
+    }
+
     List<T00Clasificador> listClasif = new ArrayList<>();
 
     public List<T00Clasificador> getListClasif() {
@@ -131,8 +140,9 @@ public class Factura implements Serializable {
         T01FacturaDetalle facturaDetalle = new T01FacturaDetalle();
         facturaDetalle.setCantidad(BigInteger.ONE);
         facturaDetalle.setClasifDescri(clasifconvalores.getS());
+        facturaDetalle.setEstado("A");
         facturaDetalle.setT00Clasificador(listCla);
-
+        facturaDetalle.setFechaCreacion(new Date());
         medico = t00MedicoFacade1.find(medico.getId());
         facturaDetalle.setT00Medico(medico);
 
@@ -458,6 +468,20 @@ public class Factura implements Serializable {
      */
     public void setMedico(T00Medico medico) {
         this.medico = medico;
+    }
+
+    /**
+     * @return the selected
+     */
+    public T01FacturaDetalle getSelected() {
+        return selected;
+    }
+
+    /**
+     * @param selected the selected to set
+     */
+    public void setSelected(T01FacturaDetalle selected) {
+        this.selected = selected;
     }
 
     /**

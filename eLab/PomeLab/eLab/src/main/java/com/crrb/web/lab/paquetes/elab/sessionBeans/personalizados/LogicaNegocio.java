@@ -105,7 +105,13 @@ public class LogicaNegocio {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<T01FacturaDetalle> cq = cb.createQuery(T01FacturaDetalle.class);
         Root<T01FacturaDetalle> root = cq.from(T01FacturaDetalle.class);
-        cq.where(cb.equal(root.get(T01FacturaDetalle_.t01Factura), par));
+
+        List<Predicate> predicatesOR = new ArrayList<>();
+        predicatesOR.add(cb.equal(root.get(T01FacturaDetalle_.t01Factura), par));
+        predicatesOR.add(cb.equal(root.get(T01FacturaDetalle_.estado), "A"));
+        cq.where(cb.and(predicatesOR.toArray(new Predicate[predicatesOR.size()])));
+        
+        
         cq.orderBy(cb.asc(root.get(T01FacturaDetalle_.id)));
         List resultList = em.createQuery(cq).setHint("eclipselink.refresh", "true").getResultList();
         return resultList;

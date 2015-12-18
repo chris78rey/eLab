@@ -70,6 +70,18 @@ public class T01FacturaDetalle implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private T01Factura t01Factura;
 
+    @Column(name = "ESTADO")
+    @Basic(optional = true)
+    private String estado;
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getEstado() {
+        return this.estado;
+    }
+
     public T01FacturaDetalle() {
     }
 
@@ -180,5 +192,5 @@ public class T01FacturaDetalle implements Serializable {
     public String toString() {
         return "com.crrb.web.lab.paquetes.elab.entidades.T01FacturaDetalle[ id=" + id + " ]";
     }
-    
+
 }

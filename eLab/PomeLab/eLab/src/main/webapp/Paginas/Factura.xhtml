@@ -259,10 +259,33 @@
 
 
                     <h:form id="f4">
+                        <div class="ui-grid-row">  
+                            <div class="ui-panelgrid-cell ui-grid-col-2">
+                            </div> 
+                            <div class="ui-panelgrid-cell ui-grid-col-4">
+                            </div>  
+                            <div class="ui-panelgrid-cell ui-grid-col-2">
+                            </div>  
+                            <div class="ui-panelgrid-cell ui-grid-col-4">
+                                <p:commandButton id="deleteButton" icon="ui-icon-trash"  
+                                                 value="Quitar de la Lista" 
+                                                 actionListener="#{factura.destroy}" 
+                                                 update="@form" 
+                                                 disabled="#{empty factura.findDetalleFactura}"/>
+                            </div>  
+                        </div>  
 
-                        <p:dataTable id="dfact" style="width: 90%;margin-left:2%;margin-right:2%;"  value="#{factura.findDetalleFactura}" var="item">
 
+                        <p:dataTable id="dfact" 
+                                     style="width: 90%;margin-left:2%;margin-right:2%;"  
+                                     value="#{factura.findDetalleFactura}" 
+                                     var="item"                                
+                                     selectionMode="single" 
+                                     selection="#{factura.selected}"
+                                     paginator="true"
+                                     rowKey="#{item.id}"
 
+                                     >
 
                             <p:column>
                                 <f:facet name="header">
