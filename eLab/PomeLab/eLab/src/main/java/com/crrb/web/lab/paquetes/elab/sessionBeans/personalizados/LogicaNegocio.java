@@ -106,6 +106,7 @@ public class LogicaNegocio {
         CriteriaQuery<T01FacturaDetalle> cq = cb.createQuery(T01FacturaDetalle.class);
         Root<T01FacturaDetalle> root = cq.from(T01FacturaDetalle.class);
         cq.where(cb.equal(root.get(T01FacturaDetalle_.t01Factura), par));
+        cq.orderBy(cb.asc(root.get(T01FacturaDetalle_.id)));
         List resultList = em.createQuery(cq).setHint("eclipselink.refresh", "true").getResultList();
         return resultList;
     }

@@ -222,9 +222,10 @@
                                     <p:outputLabel value="Recomienda:"  />
                                 </div>  
                                 <div class="ui-panelgrid-cell ui-grid-col-4">
-                                    <p:selectOneMenu id="itemcomponente" value="#{factura.medico.id}" >
-                                        <f:selectItem itemLabel="Select One..........."  noSelectionOption="true" />
+                                    <p:selectOneMenu   value="#{factura.medico.id}" >
+                                        <f:selectItem itemLabel="Select One..........."  itemValue="-1" />
                                         <f:selectItems  value="#{factura.personas}" var="item" itemLabel="#{item.apellidos} #{item.nombres}" itemValue="#{item.id}"  />
+                                        <f:ajax event="change" listener="#{factura.listen2(event)}"/>
 
                                     </p:selectOneMenu>
                                 </div>  
@@ -237,41 +238,39 @@
                                     <p:outputLabel value="Item:"  />
                                 </div> 
                                 <div class="ui-panelgrid-cell ui-grid-col-4">
-                                    <p:autoComplete size="45"  
+                                    <p:autoComplete size="100"  
                                                     value="#{factura.clasifconvalores.s}" 
                                                     completeMethod="#{factura.completeTextItem}" />
-                                </div>  
-                                <div class="ui-panelgrid-cell ui-grid-col-2">
-                                </div>  
-                                <div class="ui-panelgrid-cell ui-grid-col-4">
                                     <p:commandButton 
                                         value="Agregar" 
                                         process="@form"
-                                        update="@form,@all" 
+                                        update=":f4:dfact,@form" 
                                         actionListener="#{factura.buttonActionAgregar}" 
 
                                         />
                                 </div>  
+                                <div class="ui-panelgrid-cell ui-grid-col-2">
+                                </div>  
+                                <div class="ui-panelgrid-cell ui-grid-col-4">
+
+                                </div>  
                             </div> 
                         </p:panel>
                     </h:form>
-                    
-                    
-                    
+
+
+
                     <h:form id="f4">
 
-                        <p:dataTable id="dfact" value="#{factura.findDetalleFactura}" var="item">
+                        <p:dataTable id="dfact" style="width: 90%;margin-left:2%;margin-right:2%;"  value="#{factura.findDetalleFactura}" var="item">
+
+
+
                             <p:column>
                                 <f:facet name="header">
-                                    <h:outputText value="Id"/>
+                                    <h:outputText value="ClasifDescri"/>
                                 </f:facet>
-                                <h:outputText value="#{item.id}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Cantidad"/>
-                                </f:facet>
-                                <h:outputText value="#{item.cantidad}"/>
+                                <h:outputText value="#{item.clasifDescri}"/>
                             </p:column>
                             <p:column>
                                 <f:facet name="header">
@@ -281,42 +280,11 @@
                             </p:column>
                             <p:column>
                                 <f:facet name="header">
-                                    <h:outputText value="ClasifDescri"/>
-                                </f:facet>
-                                <h:outputText value="#{item.clasifDescri}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
                                     <h:outputText value="TieneDescuento"/>
                                 </f:facet>
                                 <h:outputText value="#{item.tieneDescuento}"/>
                             </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="FechaCreacion"/>
-                                </f:facet>
-                                <h:outputText value="#{item.fechaCreacion}">
-                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                                </h:outputText>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="T00Clasificador"/>
-                                </f:facet>
-                                <h:outputText value="#{item.t00Clasificador}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="T00Medico"/>
-                                </f:facet>
-                                <h:outputText value="#{item.t00Medico}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="T01Factura"/>
-                                </f:facet>
-                                <h:outputText value="#{item.t01Factura}"/>
-                            </p:column>
+
                         </p:dataTable>
 
                     </h:form>

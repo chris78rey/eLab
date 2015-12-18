@@ -39,8 +39,6 @@ import javax.faces.event.AjaxBehaviorEvent;
 @SessionScoped
 public class Factura implements Serializable {
 
-
-
     @EJB
     private T00MedicoFacade t00MedicoFacade1;
 
@@ -62,7 +60,7 @@ public class Factura implements Serializable {
     @EJB
     private T01FacturaFacade t01FacturaFacade;
 
-    private T00Medico medico = new T00Medico();
+    private T00Medico medico;
 
     private List<VClasifArbol> clasifArbols = new ArrayList<>();
 
@@ -90,6 +88,7 @@ public class Factura implements Serializable {
      * Creates a new instance of Factura
      */
     public Factura() {
+        this.medico = new T00Medico();
     }
     private VClasifArbol clasifconvalores = new VClasifArbol();
 
@@ -148,11 +147,12 @@ public class Factura implements Serializable {
         }
 
         facturaDetalle.setValor(descuento);
-        
-        t01FacturaDetalleFacade.create(facturaDetalle);
-        
-        findDetalleFactura = logicaNegocio.findDetalleFactura(facturaObj);
 
+        t01FacturaDetalleFacade.create(facturaDetalle);
+        clasifconvalores = new VClasifArbol();
+        findDetalleFactura = logicaNegocio.findDetalleFactura(facturaObj);
+        medico = new T00Medico();
+        aplicaDescuento = "No";
     }
 
     public void buttonAction(ActionEvent actionEvent) {
@@ -306,6 +306,9 @@ public class Factura implements Serializable {
     public List<String> completeText1(String query) {
         List<String> lista = logicaNegocio.findDNI(query);
         return lista;
+    }
+
+    public void listen2(AjaxBehaviorEvent event) {
     }
 
     public void listen1(AjaxBehaviorEvent event) {
