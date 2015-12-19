@@ -63,7 +63,7 @@ public class LogicaNegocio {
 
         Query query = em.createNativeQuery(SQLNative.toString());
 
-        List<String> results = query.setMaxResults(3).getResultList();
+        List<String> results = query.setMaxResults(150).getResultList();
         return results;
     }
 

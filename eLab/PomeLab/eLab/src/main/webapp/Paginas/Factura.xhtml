@@ -26,14 +26,14 @@
                             </div>  
                             <div class="ui-panelgrid-cell ui-grid-col-2">
                                 <p:commandButton value="Buscar" 
-                                                 process="@form" 
-                                                 update=":f2,:f4,:f2:numeroFactura,@form"  
+                                                 process="@form,:f33" 
+                                                 update=":f2,:f4,:f2:numeroFactura,@form,:f33:btnagre"  
                                                  actionListener="#{factura.buttonAction}"  />
                             </div>  
                             <div class="ui-panelgrid-cell ui-grid-col-4">
                                 <p:commandButton value="Nuevo" 
                                                  process="@form" 
-                                                 update=":f1,:f2,:f4"  
+                                                 update=":f1,:f2,:f4,:f33"  
                                                  actionListener="#{factura.buttonAction2}"  />
                             </div>  
                         </div>
@@ -179,14 +179,14 @@
                         <div class="EmptyBox10"></div>
 
 
-
+                        
                         <div class="ui-grid-row">  
                             <div class="ui-panelgrid-cell ui-grid-col-2">
                                 <p:commandButton 
                                     value="Grabar factura" 
 
                                     process="@form"
-                                    update="@form" 
+                                    update="@form,:f33" 
                                     actionListener="#{factura.buttonAction3}" 
                                     />
                             </div> 
@@ -201,10 +201,15 @@
                         <div class="EmptyBox10"></div>
 
                     </h:form>
-                    <h:form id="f33">
-                        <p:panel header="Agregar Items">
+                    <h:form id="f33" >
+                        <p:panel  
+                            header="Agregar Items"                            
+                            >
 
-                            <div class="ui-grid-row">  
+                            <div class="ui-grid-row" 
+
+
+                                 >  
                                 <div class="ui-panelgrid-cell ui-grid-col-2">
                                     <p:outputLabel value="Descuento:"  />
                                 </div> 
@@ -239,8 +244,12 @@
                                     <p:autoComplete size="100"  
                                                     value="#{factura.clasifconvalores.s}" 
                                                     completeMethod="#{factura.completeTextItem}" />
+                                    
+                                    
                                     <p:commandButton 
+                                        id="btnagre"
                                         value="Agregar" 
+                                        disabled="#{(factura.facturaObj.numeroFactura eq null) or (factura.facturaObj.numeroFactura eq '')}"
                                         process="@form"
                                         update=":f4:dfact,@form,:f4" 
                                         actionListener="#{factura.buttonActionAgregar}" 
@@ -255,8 +264,8 @@
                             </div> 
                         </p:panel>
                     </h:form>
-
-
+                    <div class="EmptyBox10"></div>
+                    <div class="EmptyBox10"></div>
 
                     <h:form id="f4">
                         <div class="ui-grid-row">  
@@ -272,6 +281,9 @@
                                                  actionListener="#{factura.destroy}" 
                                                  update="@form" 
                                                  disabled="#{empty factura.findDetalleFactura}"/>
+
+                                <div class="EmptyBox10"></div>
+                                <div class="EmptyBox10"></div>
                             </div>  
                         </div>  
 
@@ -284,7 +296,7 @@
                                      selection="#{factura.selected}"
                                      paginator="true"
                                      rowKey="#{item.id}"
-
+                                     reflow="true"
                                      >
 
                             <p:column>

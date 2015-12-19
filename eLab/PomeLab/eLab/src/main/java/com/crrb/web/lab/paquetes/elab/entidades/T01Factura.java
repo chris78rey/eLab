@@ -90,7 +90,7 @@ public class T01Factura implements Serializable {
     }
 
     public void setNumeroFactura(String numeroFactura) {
-
+        numeroFactura = (numeroFactura == null) ? "ABC" : numeroFactura;
         this.numeroFactura = numeroFactura.toUpperCase();
     }
 

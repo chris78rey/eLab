@@ -186,7 +186,7 @@ public class Factura implements Serializable {
     }
 
     public void buttonAction2(ActionEvent actionEvent) {
-        System.out.println("actionEvent = " + actionEvent);
+//        System.out.println("actionEvent = " + actionEvent);
         facturas = new ArrayList<>();
         facturaObj = new T01Factura();
         findDetalleFactura = new ArrayList<>();
@@ -218,6 +218,8 @@ public class Factura implements Serializable {
         findDetalleFactura = new ArrayList<>();
         medico = new T00Medico();
         clasifconvalores = new VClasifArbol();
+        facturaObj = new T01Factura();
+        selected = new T01FacturaDetalle();
 
     }
 
@@ -321,6 +323,11 @@ public class Factura implements Serializable {
         return logicaNegocio.findFacturaByNumeroFactura(numeroFactura);
     }
 
+    public List<T01Factura> getCabeceraGenerada() {
+        List<T01Factura> findFacturaByNumeroFactura = logicaNegocio.findFacturaByNumeroFactura(facturaObj.getNumeroFactura());
+        return findFacturaByNumeroFactura;
+    }
+
     public List<String> completeText1(String query) {
         List<String> lista = logicaNegocio.findDNI(query);
         return lista;
@@ -333,10 +340,10 @@ public class Factura implements Serializable {
 
         String ccRucPasaporte = persona.getCcRucPasaporte();
         List<T00Persona> findPersonaByCC = logicaNegocio.findPersonaByCC(ccRucPasaporte);
-        if (findPersonaByCC.size() != 0) {
-            for (T00Persona t00Persona : findPersonaByCC) {
+        if (!findPersonaByCC.isEmpty()) {
+            findPersonaByCC.stream().forEach((t00Persona) -> {
                 persona = t00Persona;
-            }
+            });
         } else {
             persona = new T00Persona();
             persona.setCcRucPasaporte(ccRucPasaporte);
