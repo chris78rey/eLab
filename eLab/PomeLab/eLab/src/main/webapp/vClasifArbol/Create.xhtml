@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VClasifArbolCreateDlg" widgetVar="VClasifArbolCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateVClasifArbolTitle}">
+            <h:form id="VClasifArbolCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{vClasifArbolController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateVClasifArbolLabel_iva}" for="iva" />
+                        <p:inputText id="iva" value="#{vClasifArbolController.selected.iva}" title="#{bundle.CreateVClasifArbolTitle_iva}" />
+                        <p:outputLabel value="#{bundle.CreateVClasifArbolLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{vClasifArbolController.selected.id}" title="#{bundle.CreateVClasifArbolTitle_id}" required="true" requiredMessage="#{bundle.CreateVClasifArbolRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateVClasifArbolLabel_nivel}" for="nivel" />
+                        <p:inputText id="nivel" value="#{vClasifArbolController.selected.nivel}" title="#{bundle.CreateVClasifArbolTitle_nivel}" />
+                        <p:outputLabel value="#{bundle.CreateVClasifArbolLabel_s}" for="s" />
+                        <p:inputText id="s" value="#{vClasifArbolController.selected.s}" title="#{bundle.CreateVClasifArbolTitle_s}" />
+                        <p:outputLabel value="#{bundle.CreateVClasifArbolLabel_conDescuento}" for="conDescuento" />
+                        <p:inputText id="conDescuento" value="#{vClasifArbolController.selected.conDescuento}" title="#{bundle.CreateVClasifArbolTitle_conDescuento}" />
+                        <p:outputLabel value="#{bundle.CreateVClasifArbolLabel_sinDescuento}" for="sinDescuento" />
+                        <p:inputText id="sinDescuento" value="#{vClasifArbolController.selected.sinDescuento}" title="#{bundle.CreateVClasifArbolTitle_sinDescuento}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{vClasifArbolController.create}" value="#{bundle.Save}" update="display,:VClasifArbolListForm:datalist,:growl" oncomplete="handleSubmit(args,'VClasifArbolCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="VClasifArbolCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

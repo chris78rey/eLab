@@ -28,6 +28,21 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "VClasifArbol.findAll", query = "SELECT v FROM VClasifArbol v")})
 public class VClasifArbol implements Serializable {
 
+    @Column(name = "ID_PADRE")
+    @Basic(optional = true)
+    private BigDecimal idPadre;
+
+    public void setIdPadre(BigDecimal idPadre) {
+        this.idPadre = idPadre;
+    }
+
+    public BigDecimal getIdPadre() {
+        return this.idPadre;
+    }
+
+    @Column(name = "IVA")
+    private Double iva;
+
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
@@ -116,5 +131,13 @@ public class VClasifArbol implements Serializable {
     public String toString() {
         return "com.crrb.web.lab.paquetes.elab.entidades.VClasifArbol[ id=" + id + " ]";
     }
-    
+
+    public Double getIva() {
+        return iva;
+    }
+
+    public void setIva(Double iva) {
+        this.iva = iva;
+    }
+
 }

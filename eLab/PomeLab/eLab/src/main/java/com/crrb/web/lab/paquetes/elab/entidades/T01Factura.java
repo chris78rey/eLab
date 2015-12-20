@@ -64,6 +64,9 @@ public class T01Factura implements Serializable {
     private T00Cliente t00Cliente;
     @OneToMany(mappedBy = "t01Factura", fetch = FetchType.LAZY)
     private List<T01FacturaDetalle> t01FacturaDetalleList;
+    @Column(name = "CERRADA")
+    @Basic(optional = true)
+    private BigDecimal cerrada;
 
     public T01Factura() {
     }
@@ -124,6 +127,14 @@ public class T01Factura implements Serializable {
 
     public void setT01FacturaDetalleList(List<T01FacturaDetalle> t01FacturaDetalleList) {
         this.t01FacturaDetalleList = t01FacturaDetalleList;
+    }
+
+    public void setCerrada(BigDecimal cerrada) {
+        this.cerrada = cerrada;
+    }
+
+    public BigDecimal getCerrada() {
+        return this.cerrada;
     }
 
     @Override

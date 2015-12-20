@@ -110,8 +110,7 @@ public class LogicaNegocio {
         predicatesOR.add(cb.equal(root.get(T01FacturaDetalle_.t01Factura), par));
         predicatesOR.add(cb.equal(root.get(T01FacturaDetalle_.estado), "A"));
         cq.where(cb.and(predicatesOR.toArray(new Predicate[predicatesOR.size()])));
-        
-        
+
         cq.orderBy(cb.asc(root.get(T01FacturaDetalle_.id)));
         List resultList = em.createQuery(cq).setHint("eclipselink.refresh", "true").getResultList();
         return resultList;
@@ -149,6 +148,19 @@ public class LogicaNegocio {
         CriteriaQuery<VClasifArbol> cq = cb.createQuery(VClasifArbol.class);
         Root<VClasifArbol> root = cq.from(VClasifArbol.class);
 
+        List resultList;
+        resultList = em.createQuery(cq).setHint("eclipselink.refresh", "true").getResultList();
+        return resultList;
+    }
+
+    public List<VClasifArbol> findArbolClasif2() {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<VClasifArbol> cq = cb.createQuery(VClasifArbol.class);
+        Root<VClasifArbol> root = cq.from(VClasifArbol.class);
+        List<Predicate> predicatesOR = new ArrayList<Predicate>();
+        predicatesOR.add(cb.isNull(root.get(VClasifArbol_.conDescuento)));
+        predicatesOR.add(cb.isNull(root.get(VClasifArbol_.sinDescuento)));
+        cq.where(cb.and(predicatesOR.toArray(new Predicate[predicatesOR.size()])));
         List resultList;
         resultList = em.createQuery(cq).setHint("eclipselink.refresh", "true").getResultList();
         return resultList;

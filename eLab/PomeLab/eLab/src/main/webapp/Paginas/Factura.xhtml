@@ -11,7 +11,7 @@
         <div class="EmptyBox10"/>
         <div class="Container100 BorBotLeaden ui-fluid">  
             <div class="ContainerIndent">           
-                <p:panel header="Factura">
+                <p:panel header="Registro de exámenes">
                     <div class="EmptyBox10"></div>
                     <div class="EmptyBox10"></div>
                     <h:form id="f1">
@@ -179,12 +179,12 @@
                         <div class="EmptyBox10"></div>
 
 
-                        
+
                         <div class="ui-grid-row">  
                             <div class="ui-panelgrid-cell ui-grid-col-2">
                                 <p:commandButton 
                                     value="Grabar factura" 
-
+                                    disabled="#{(factura.facturaObj.cerrada eq 1)}"
                                     process="@form"
                                     update="@form,:f33" 
                                     actionListener="#{factura.buttonAction3}" 
@@ -228,8 +228,7 @@
                                     <p:selectOneMenu   value="#{factura.medico.id}" >
                                         <f:selectItem itemLabel="Select One..........."  itemValue="-1" />
                                         <f:selectItems  value="#{factura.personas}" var="item" itemLabel="#{item.apellidos} #{item.nombres}" itemValue="#{item.id}"  />
-                                        <f:ajax event="change" listener="#{factura.listen2(event)}"/>
-
+                                     
                                     </p:selectOneMenu>
                                 </div>  
                             </div>  
@@ -244,12 +243,12 @@
                                     <p:autoComplete size="100"  
                                                     value="#{factura.clasifconvalores.s}" 
                                                     completeMethod="#{factura.completeTextItem}" />
-                                    
-                                    
+
+
                                     <p:commandButton 
                                         id="btnagre"
                                         value="Agregar" 
-                                        disabled="#{(factura.facturaObj.numeroFactura eq null) or (factura.facturaObj.numeroFactura eq '')}"
+                                        disabled="#{ (factura.facturaObj.cerrada eq 1) or  ((factura.facturaObj.numeroFactura eq null) or (factura.facturaObj.numeroFactura eq '') ) }"
                                         process="@form"
                                         update=":f4:dfact,@form,:f4" 
                                         actionListener="#{factura.buttonActionAgregar}" 
@@ -280,7 +279,7 @@
                                                  value="Quitar de la Lista" 
                                                  actionListener="#{factura.destroy}" 
                                                  update="@form" 
-                                                 disabled="#{empty factura.findDetalleFactura}"/>
+                                                 disabled="#{(empty factura.findDetalleFactura) or (factura.facturaObj.cerrada eq 1)  }"/>
 
                                 <div class="EmptyBox10"></div>
                                 <div class="EmptyBox10"></div>
@@ -319,6 +318,32 @@
                             </p:column>
 
                         </p:dataTable>
+
+                        <div class="EmptyBox10"></div>
+                        <div class="EmptyBox10"></div>
+                        <div class="EmptyBox10"></div>
+                        <div class="EmptyBox10"></div>
+
+                        <div class="ui-grid-row">  
+                            <div class="ui-panelgrid-cell ui-grid-col-2">
+
+                                <p:commandButton 
+                                    value="Finalizar" 
+                                    id="finalizar" 
+                                    rendered="#{(factura.facturaObj.cerrada eq 0)}"
+                                    update=":f1,:f2,:f33,:f4"
+                                    actionListener="#{factura.buttonActionFin}" 
+                                    />
+
+                            </div> 
+                            <div class="ui-panelgrid-cell ui-grid-col-4">
+                            </div>  
+                            <div class="ui-panelgrid-cell ui-grid-col-2">
+                            </div>  
+                            <div class="ui-panelgrid-cell ui-grid-col-4">
+                            </div>  
+                        </div>  
+
 
                     </h:form>
 
