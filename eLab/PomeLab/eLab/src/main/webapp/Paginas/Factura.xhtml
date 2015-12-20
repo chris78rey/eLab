@@ -228,7 +228,7 @@
                                     <p:selectOneMenu   value="#{factura.medico.id}" >
                                         <f:selectItem itemLabel="Select One..........."  itemValue="-1" />
                                         <f:selectItems  value="#{factura.personas}" var="item" itemLabel="#{item.apellidos} #{item.nombres}" itemValue="#{item.id}"  />
-                                     
+
                                     </p:selectOneMenu>
                                 </div>  
                             </div>  
@@ -333,8 +333,13 @@
                                     rendered="#{(factura.facturaObj.cerrada eq 0)}"
                                     update=":f1,:f2,:f33,:f4"
                                     actionListener="#{factura.buttonActionFin}" 
-                                    />
-
+                                    >
+                                    <p:confirm header="Confirmar" message="Luego de finalizar usted ya no puede modificar la factura" icon="ui-icon-alert" />
+                                </p:commandButton>
+                                <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                                    <p:commandButton value="Sí" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                </p:confirmDialog>
                             </div> 
                             <div class="ui-panelgrid-cell ui-grid-col-4">
                             </div>  
