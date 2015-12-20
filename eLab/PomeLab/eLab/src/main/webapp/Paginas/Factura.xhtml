@@ -215,7 +215,7 @@
                                 </div> 
                                 <div class="ui-panelgrid-cell ui-grid-col-4">
                                     <h:panelGrid columns="2"   cellpadding="5">                                    
-                                        <p:selectOneRadio layout="pageDirection" value="#{factura.aplicaDescuento}">
+                                        <p:selectOneRadio id="descso" layout="pageDirection" value="#{factura.aplicaDescuento}">
                                             <f:selectItem itemLabel="No" itemValue="No"  />
                                             <f:selectItem itemLabel="Sí" itemValue="Sí" />
                                         </p:selectOneRadio>
@@ -240,27 +240,52 @@
                                     <p:outputLabel value="Item:"  />
                                 </div> 
                                 <div class="ui-panelgrid-cell ui-grid-col-4">
-                                    <p:autoComplete size="100"  
+                                    <p:autoComplete id="idtes" size="35"  
                                                     value="#{factura.clasifconvalores.s}" 
                                                     completeMethod="#{factura.completeTextItem}" />
 
 
+
+                                </div>  
+                                <div class="ui-panelgrid-cell ui-grid-col-2">
+                                    <p:commandButton 
+                                        value="Precio" 
+                                        process="@form"
+                                        update="preciocalculado,btnagre" 
+                                        actionListener="#{factura.buttonActionPrecio}" 
+
+                                        />
+                                </div>  
+                                <div class="ui-panelgrid-cell ui-grid-col-4">
+                                </div>  
+                            </div> 
+
+                            <div class="EmptyBox10"></div>
+                            <div class="EmptyBox10"></div>
+
+                            <div class="ui-grid-row">  
+                                <div class="ui-panelgrid-cell ui-grid-col-2">
+                                    <p:outputLabel value="Precio:"  />
+                                </div>  
+                                <div class="ui-panelgrid-cell ui-grid-col-4">
+                                    <p:inputText id="preciocalculado" value="#{factura.descuentoInputText}"/>
+                                </div>  
+                                <div class="ui-panelgrid-cell ui-grid-col-2">
                                     <p:commandButton 
                                         id="btnagre"
                                         value="Agregar" 
-                                        disabled="#{ (factura.facturaObj.cerrada eq 1) or  ((factura.facturaObj.numeroFactura eq null) or (factura.facturaObj.numeroFactura eq '') ) }"
+                                        
+                                        disabled="#{factura.descuentoInputText eq 0 or factura.descuentoInputText eq null or (factura.facturaObj.cerrada eq 1)}"
                                         process="@form"
-                                        update=":f4:dfact,@form,:f4" 
+                                        update=":f4:dfact,:f4,idtes,descso,preciocalculado" 
                                         actionListener="#{factura.buttonActionAgregar}" 
 
                                         />
                                 </div>  
-                                <div class="ui-panelgrid-cell ui-grid-col-2">
-                                </div>  
                                 <div class="ui-panelgrid-cell ui-grid-col-4">
-
                                 </div>  
-                            </div> 
+                            </div>  
+
                         </p:panel>
                     </h:form>
                     <div class="EmptyBox10"></div>
@@ -310,12 +335,7 @@
                                 </f:facet>
                                 <h:outputText value="#{item.valor}"/>
                             </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="TieneDescuento"/>
-                                </f:facet>
-                                <h:outputText value="#{item.tieneDescuento}"/>
-                            </p:column>
+                        
 
                         </p:dataTable>
 
