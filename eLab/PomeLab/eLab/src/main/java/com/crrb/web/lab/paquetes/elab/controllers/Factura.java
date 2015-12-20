@@ -5,6 +5,7 @@
  */
 package com.crrb.web.lab.paquetes.elab.controllers;
 
+import javax.faces.application.FacesMessage;
 import com.crrb.web.lab.paquetes.elab.entidades.T00Clasificador;
 import com.crrb.web.lab.paquetes.elab.entidades.T00Cliente;
 import com.crrb.web.lab.paquetes.elab.entidades.T00Medico;
@@ -29,6 +30,8 @@ import java.util.Iterator;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.AjaxBehaviorEvent;
 
@@ -132,6 +135,7 @@ public class Factura implements Serializable {
     }
 
     public void buttonActionAgregar(ActionEvent actionEvent) {
+        saveMessage();
         listClasif = findClasificadorPorDescripcion(clasifconvalores.getS());
         T00Clasificador listCla = new T00Clasificador();
         for (Iterator<T00Clasificador> it = listClasif.iterator(); it.hasNext();) {
@@ -168,6 +172,7 @@ public class Factura implements Serializable {
 
         descuentoInputText = new Double("0");
         medico.setId(new BigDecimal("-1"));
+        
     }
 
     private Double descuentoInputText = new Double("0");
@@ -246,6 +251,12 @@ public class Factura implements Serializable {
         selected = new T01FacturaDetalle();
 
         aplicaDescuento = "No";
+    }
+
+    public void saveMessage() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Se agrego el item "+ clasifconvalores.getS(), "S"));
+
     }
 
     public void buttonActionFin(ActionEvent actionEvent) {

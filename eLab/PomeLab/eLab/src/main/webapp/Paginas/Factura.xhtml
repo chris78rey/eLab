@@ -10,7 +10,8 @@
 
         <div class="EmptyBox10"/>
         <div class="Container100 BorBotLeaden ui-fluid">  
-            <div class="ContainerIndent">           
+            <div class="ContainerIndent">   
+                <p:growl id="growl" life="3000" />
                 <p:panel header="Registro de exámenes">
                     <div class="EmptyBox10"></div>
                     <div class="EmptyBox10"></div>
@@ -274,10 +275,10 @@
                                     <p:commandButton 
                                         id="btnagre"
                                         value="Agregar" 
-                                        
+
                                         disabled="#{factura.descuentoInputText eq 0 or factura.descuentoInputText eq null or (factura.facturaObj.cerrada eq 1)}"
                                         process="@form"
-                                        update=":f4:dfact,:f4,idtes,descso,preciocalculado" 
+                                        update=":f4:dfact,:f4,idtes,descso,preciocalculado,growl" 
                                         actionListener="#{factura.buttonActionAgregar}" 
 
                                         />
@@ -335,7 +336,7 @@
                                 </f:facet>
                                 <h:outputText value="#{item.valor}"/>
                             </p:column>
-                        
+
 
                         </p:dataTable>
 
