@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/WEB-INF/template.xhtml">  
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListVClienteTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="content">
+            <p:growl id="growl" life="3000" />
+            <h:form id="VClienteListForm">
+                <p:panel header="#{bundle.ListVClienteTitle}">
+                    <p:dataTable id="datalist" value="#{vClienteController.items}" var="item"
+                                 selectionMode="single" selection="#{vClienteController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 reflow="true"
+                                 style="width: 90%;margin-left:5%;margin-right:5%;" 
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+
+                        <p:column filterBy="#{item.ccRucPasaporte}"  filterMatchMode="contains" >
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVClienteTitle_ccRucPasaporte}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ccRucPasaporte}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.apellidos}"  filterMatchMode="contains" >
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVClienteTitle_apellidos}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.apellidos}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.nombres}"  filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVClienteTitle_nombres}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombres}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVClienteTitle_telef}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.telef}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVClienteTitle_celular}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.celular}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVClienteTitle_email}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.email}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVClienteTitle_direccion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.direccion}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{vClienteController.prepareCreate}" update=":VClienteCreateForm" oncomplete="PF('VClienteCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":VClienteViewForm" oncomplete="PF('VClienteViewDialog').show()" disabled="#{empty vClienteController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":VClienteEditForm" oncomplete="PF('VClienteEditDialog').show()" disabled="#{empty vClienteController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{vClienteController.destroy}" update=":growl,datalist" disabled="#{empty vClienteController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
+
+

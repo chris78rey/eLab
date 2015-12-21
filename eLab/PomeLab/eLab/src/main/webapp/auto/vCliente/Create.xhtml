@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VClienteCreateDlg" widgetVar="VClienteCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateVClienteTitle}">
+            <h:form id="VClienteCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{vClienteController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateVClienteLabel_ccRucPasaporte}" for="ccRucPasaporte" />
+                        <p:inputText id="ccRucPasaporte" value="#{vClienteController.selected.ccRucPasaporte}" title="#{bundle.CreateVClienteTitle_ccRucPasaporte}" />
+                        <p:outputLabel value="#{bundle.CreateVClienteLabel_apellidos}" for="apellidos" />
+                        <p:inputText id="apellidos" value="#{vClienteController.selected.apellidos}" title="#{bundle.CreateVClienteTitle_apellidos}" />
+                        <p:outputLabel value="#{bundle.CreateVClienteLabel_nombres}" for="nombres" />
+                        <p:inputText id="nombres" value="#{vClienteController.selected.nombres}" title="#{bundle.CreateVClienteTitle_nombres}" />
+                        <p:outputLabel value="#{bundle.CreateVClienteLabel_telef}" for="telef" />
+                        <p:inputText id="telef" value="#{vClienteController.selected.telef}" title="#{bundle.CreateVClienteTitle_telef}" />
+                        <p:outputLabel value="#{bundle.CreateVClienteLabel_celular}" for="celular" />
+                        <p:inputText id="celular" value="#{vClienteController.selected.celular}" title="#{bundle.CreateVClienteTitle_celular}" />
+                        <p:outputLabel value="#{bundle.CreateVClienteLabel_email}" for="email" />
+                        <p:inputText id="email" value="#{vClienteController.selected.email}" title="#{bundle.CreateVClienteTitle_email}" />
+                        <p:outputLabel value="#{bundle.CreateVClienteLabel_direccion}" for="direccion" />
+                        <p:inputText id="direccion" value="#{vClienteController.selected.direccion}" title="#{bundle.CreateVClienteTitle_direccion}" />
+                    </p:panelGrid>
+                    <p:commandButton 
+                        actionListener="#{vClienteController.create}" 
+                        value="#{bundle.Save}" 
+                        update="@this,:VClienteListForm" 
+                        oncomplete="handleSubmit(args,'VClienteCreateDialog');"
+                        />
+                    <p:commandButton value="#{bundle.Cancel}" onclick="VClienteCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

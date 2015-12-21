@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VPersonaMedicoEditDlg" widgetVar="VPersonaMedicoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditVPersonaMedicoTitle}">
+            <h:form id="VPersonaMedicoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{vPersonaMedicoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditVPersonaMedicoLabel_ccRucPasaporte}" for="ccRucPasaporte" />
+                        <p:inputText id="ccRucPasaporte" value="#{vPersonaMedicoController.selected.ccRucPasaporte}" title="#{bundle.EditVPersonaMedicoTitle_ccRucPasaporte}" />
+                        <p:outputLabel value="#{bundle.EditVPersonaMedicoLabel_apellidos}" for="apellidos" />
+                        <p:inputText id="apellidos" value="#{vPersonaMedicoController.selected.apellidos}" title="#{bundle.EditVPersonaMedicoTitle_apellidos}" />
+                        <p:outputLabel value="#{bundle.EditVPersonaMedicoLabel_nombres}" for="nombres" />
+                        <p:inputText id="nombres" value="#{vPersonaMedicoController.selected.nombres}" title="#{bundle.EditVPersonaMedicoTitle_nombres}" />
+                        <p:outputLabel value="#{bundle.EditVPersonaMedicoLabel_telef}" for="telef" />
+                        <p:inputText id="telef" value="#{vPersonaMedicoController.selected.telef}" title="#{bundle.EditVPersonaMedicoTitle_telef}" />
+                        <p:outputLabel value="#{bundle.EditVPersonaMedicoLabel_celular}" for="celular" />
+                        <p:inputText id="celular" value="#{vPersonaMedicoController.selected.celular}" title="#{bundle.EditVPersonaMedicoTitle_celular}" />
+                        <p:outputLabel value="#{bundle.EditVPersonaMedicoLabel_email}" for="email" />
+                        <p:inputText id="email" value="#{vPersonaMedicoController.selected.email}" title="#{bundle.EditVPersonaMedicoTitle_email}" />
+                        <p:outputLabel value="#{bundle.EditVPersonaMedicoLabel_direccion}" for="direccion" />
+                        <p:inputText id="direccion" value="#{vPersonaMedicoController.selected.direccion}" title="#{bundle.EditVPersonaMedicoTitle_direccion}" />
+                        <p:outputLabel value="#{bundle.EditVPersonaMedicoLabel_porcentaje}" for="porcentaje" />
+                        <p:inputText id="porcentaje" value="#{vPersonaMedicoController.selected.porcentaje}" title="#{bundle.EditVPersonaMedicoTitle_porcentaje}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{vPersonaMedicoController.update}" value="#{bundle.Save}" update="@this,:VPersonaMedicoListForm" oncomplete="handleSubmit(args, 'VPersonaMedicoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="VPersonaMedicoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

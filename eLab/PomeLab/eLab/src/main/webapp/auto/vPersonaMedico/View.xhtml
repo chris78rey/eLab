@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VPersonaMedicoViewDlg" widgetVar="VPersonaMedicoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewVPersonaMedicoTitle}">
+            <h:form id="VPersonaMedicoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{vPersonaMedicoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewVPersonaMedicoLabel_ccRucPasaporte}"/>
+                        <h:outputText value="#{vPersonaMedicoController.selected.ccRucPasaporte}" title="#{bundle.ViewVPersonaMedicoTitle_ccRucPasaporte}"/>
+                        <h:outputText value="#{bundle.ViewVPersonaMedicoLabel_apellidos}"/>
+                        <h:outputText value="#{vPersonaMedicoController.selected.apellidos}" title="#{bundle.ViewVPersonaMedicoTitle_apellidos}"/>
+                        <h:outputText value="#{bundle.ViewVPersonaMedicoLabel_nombres}"/>
+                        <h:outputText value="#{vPersonaMedicoController.selected.nombres}" title="#{bundle.ViewVPersonaMedicoTitle_nombres}"/>
+                        <h:outputText value="#{bundle.ViewVPersonaMedicoLabel_telef}"/>
+                        <h:outputText value="#{vPersonaMedicoController.selected.telef}" title="#{bundle.ViewVPersonaMedicoTitle_telef}"/>
+                        <h:outputText value="#{bundle.ViewVPersonaMedicoLabel_celular}"/>
+                        <h:outputText value="#{vPersonaMedicoController.selected.celular}" title="#{bundle.ViewVPersonaMedicoTitle_celular}"/>
+                        <h:outputText value="#{bundle.ViewVPersonaMedicoLabel_email}"/>
+                        <h:outputText value="#{vPersonaMedicoController.selected.email}" title="#{bundle.ViewVPersonaMedicoTitle_email}"/>
+                        <h:outputText value="#{bundle.ViewVPersonaMedicoLabel_direccion}"/>
+                        <h:outputText value="#{vPersonaMedicoController.selected.direccion}" title="#{bundle.ViewVPersonaMedicoTitle_direccion}"/>
+                        <h:outputText value="#{bundle.ViewVPersonaMedicoLabel_idMedico}"/>
+                        <h:outputText value="#{vPersonaMedicoController.selected.idMedico}" title="#{bundle.ViewVPersonaMedicoTitle_idMedico}"/>
+                        <h:outputText value="#{bundle.ViewVPersonaMedicoLabel_porcentaje}"/>
+                        <h:outputText value="#{vPersonaMedicoController.selected.porcentaje}" title="#{bundle.ViewVPersonaMedicoTitle_porcentaje}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="VPersonaMedicoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
