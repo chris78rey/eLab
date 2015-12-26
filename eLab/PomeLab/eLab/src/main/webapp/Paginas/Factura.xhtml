@@ -11,28 +11,50 @@
         <div class="Container100">
             <div class="ContainerIndent">
                 <div class="Card ShadowEffect  ">
-                    <div class="Container50 Responsive50">
+                    <div class="Container100 Responsive100">
                         <div class="ContainerIndent">
-                            <h2 class="BigTopic">Buscar Factura o Crearla</h2>
-                            <h:panelGrid columns="1" cellpadding="5">
-                                <h:form id="f1">
-                                    <p:outputLabel value="Número de Factura:"  />
-                                    <p:autoComplete  value="#{factura.facturaObj.numeroFactura}" completeMethod="#{factura.completeText}"   >
-
-                                    </p:autoComplete>
-                                    <p:commandButton value="Buscar" 
-                                                     process="@form,:f33" 
-                                                     update=":f2,:f4,:f2:numeroFactura,@form,:f33:btnagre"  
-                                                     actionListener="#{factura.buttonAction}"  />
-                                    <p:commandButton value="Nuevo" 
-                                                     process="@form" 
-                                                     update=":f1,:f2,:f4,:f33"  
-                                                     actionListener="#{factura.buttonAction2}"  />
+                            <p:panel header="Buscar/Crear">
+                                <h:panelGrid columns="1" cellpadding="1">
+                                    <h:form id="f1">
 
 
-                                </h:form>
 
-                            </h:panelGrid>
+
+                                        <div class="Container100 Responsive100">
+                                            <div class="ContainerIndent">                    
+                                                <h:panelGrid columns="1" cellpadding="5">
+                                                    <p:outputLabel value="Número de Factura:"  />
+                                                    <p:autoComplete  value="#{factura.facturaObj.numeroFactura}" completeMethod="#{factura.completeText}"   >
+                                                    </p:autoComplete>
+                                                </h:panelGrid>                    
+                                            </div>
+                                        </div>
+                                        <div class="Container50 Responsive50">
+                                            <div class="ContainerIndent">                    
+                                                <h:panelGrid columns="2" cellpadding="5">
+
+                                                    <p:commandButton value="Buscar" 
+                                                                     process="@form,:f33" 
+                                                                     update=":f2,:f4,:f2:numeroFactura,@form,:f33:btnagre"  
+                                                                     actionListener="#{factura.buttonAction}"  />
+                                                    <p:commandButton value="Nuevo" 
+                                                                     process="@form" 
+                                                                     update=":f1,:f2,:f4,:f33"  
+                                                                     actionListener="#{factura.buttonAction2}"  />
+
+                                                </h:panelGrid>                    
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+                                    </h:form>
+
+                                </h:panelGrid>
+                            </p:panel>
                         </div>
                     </div>
 
@@ -41,90 +63,144 @@
         </div>
 
 
-        <div class="Container100">
-            <div class="ContainerIndent">
-                <h:form id="f2">
+        <h:form id="f2">
+            <div class="Container100">
+                <div class="ContainerIndent">
                     <div class="Card ShadowEffect  ">
-                        <div class="Container50 Responsive50">
-                            <div class="ContainerIndent">
+                        <p:panel header="Datos de la factura y cliente">
+                            <div class="Container50 Responsive50">
+                                <div class="ContainerIndent">                 
+                                    <h:panelGrid columns="1" cellpadding="1">
+                                        <p:outputLabel value="NumeroFactura:"  />
+                                        <p:inputText id="numeroFactura" style="width: 300px"  value="#{factura.facturaObj.numeroFactura}" title="NumeroFactura" />
 
-                                <h2 class="BigTopic">Información del Cliente</h2>
-                                <h:panelGrid columns="1" cellpadding="5">
-                                    <p:outputLabel value="NumeroFactura:"  />
-                                    <p:inputText id="numeroFactura" value="#{factura.facturaObj.numeroFactura}" title="NumeroFactura" />
-                                    <p:outputLabel value="Fecha:"  />
-                                    <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy" 
-                                                value="#{factura.facturaObj.fecha}" 
-                                                title="Fecha:"  
-                                                showOn="button"/>
-                                </h:panelGrid>
-                                <h:panelGrid columns="1" cellpadding="5">
-                                    <p:outputLabel value="CcRucPasaporte:" />
-                                    <h:panelGrid columns="2" cellpadding="5">
-                                        <p:autoComplete id="acSimple"  value="#{factura.persona.ccRucPasaporte}"   completeMethod="#{factura.completeText1}" >
-                                        </p:autoComplete>
-                                        <p:commandButton 
-                                            value="..."
-                                            process="@form"
-
-                                            update="@form" 
-                                            actionListener="#{factura.buttonActionRefreCC}" 
-                                            />
-                                    </h:panelGrid>
-                                </h:panelGrid>
-                                <h:panelGrid columns="1" cellpadding="5">
-                                    <p:outputLabel value="Apellidos:" for="apellidos" />
-                                    <p:inputText id="apellidos" value="#{factura.persona.apellidos}" title="Apellidos" />
-                                    <p:outputLabel value="Nombres:" for="nombres" />
-                                    <p:inputText id="nombres" value="#{factura.persona.nombres}" title="Nombres" />
-
-                                </h:panelGrid>
-
-
-
-
-
-
+                                    </h:panelGrid>                    
+                                </div>
                             </div>
-                        </div>
+                            <div class="Container50 Responsive50">
+                                <div class="ContainerIndent">                    
+                                    <h:panelGrid columns="1" cellpadding="1">
+                                        <p:outputLabel value="Fecha:"  />
+                                        <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy" 
+                                                    value="#{factura.facturaObj.fecha}" 
+                                                    title="Fecha:"  
+                                                    showOn="button"/>
 
-
-                        <div class="Container50 Responsive50">
-                            <div class="ContainerIndent">
-                                <h2 class="BigTopic">.</h2>
-                                <h:panelGrid columns="1" cellpadding="5">
-                                    <p:outputLabel value="Telef:" for="telef" />
-                                    <p:inputText id="telef" value="#{factura.persona.telef}" title="Telef" />
-                                    <p:outputLabel value="Celular:" for="celular" />
-                                    <p:inputText id="celular" value="#{factura.persona.celular}" title="Celular" />
-
-
-
-                                    <p:outputLabel value="Email:" for="email" />
-                                    <p:inputText id="email" value="#{factura.persona.email}" title="Email" />
-                                    <p:outputLabel value="Direccion:" for="direccion" />
-                                    <p:inputText id="direccion" value="#{factura.persona.direccion}" title="Direccion" />
-
-                                </h:panelGrid>
-
+                                    </h:panelGrid>                    
+                                </div>
                             </div>
-                        </div>
 
 
+                            <div class="Container50 Responsive50">
+                                <div class="ContainerIndent">                 
+                                    <h:panelGrid columns="1" cellpadding="1">
+                                        <p:outputLabel value="CcRucPasaporte:" />
+                                        <h:panelGrid columns="2" cellpadding="1">
+                                            <p:autoComplete id="acSimple" style="width: 300px"  value="#{factura.persona.ccRucPasaporte}"   completeMethod="#{factura.completeText1}" >
+                                            </p:autoComplete>
+                                            <p:commandButton 
+                                                value="..."
+                                                process="@form"
+
+                                                update="@form" 
+                                                actionListener="#{factura.buttonActionRefreCC}" 
+                                                />
+                                        </h:panelGrid>
+
+                                    </h:panelGrid>                    
+                                </div>
+                            </div>
+                            <div class="Container50 Responsive50">
+                                <div class="ContainerIndent">                    
+                                    <h:panelGrid columns="1" cellpadding="1">
+                                        <p:outputLabel value="Apellidos:" for="apellidos" />
+                                        <p:inputText id="apellidos" style="width: 300px" value="#{factura.persona.apellidos}" title="Apellidos" />
+
+                                    </h:panelGrid>                    
+                                </div>
+                            </div>
+
+
+                            <div class="Container50 Responsive50">
+                                <div class="ContainerIndent">                 
+                                    <h:panelGrid columns="1" cellpadding="1">
+                                        <p:outputLabel value="Nombres:" for="nombres" />
+                                        <p:inputText id="nombres" style="width: 300px" value="#{factura.persona.nombres}" title="Nombres" />
+                                    </h:panelGrid>                    
+                                </div>
+                            </div>
+                            <div class="Container50 Responsive50">
+                                <div class="ContainerIndent">                    
+                                    <h:panelGrid columns="1" cellpadding="1">
+                                        <p:outputLabel value="Telef:" for="telef" />
+                                        <p:inputText id="telef" style="width: 300px" value="#{factura.persona.telef}" title="Telef" />
+
+                                    </h:panelGrid>                    
+                                </div>
+                            </div>
+
+
+
+
+
+                            <div class="Container50 Responsive50">
+                                <div class="ContainerIndent">                    
+                                    <h:panelGrid columns="1" cellpadding="1">
+                                        <p:outputLabel value="Celular:" for="celular" />
+                                        <p:inputText id="celular" style="width: 300px" value="#{factura.persona.celular}" title="Celular" />
+
+
+                                    </h:panelGrid>                    
+                                </div>
+                            </div>
+                            <div class="Container50 Responsive50">
+                                <div class="ContainerIndent">                    
+                                    <h:panelGrid columns="1" cellpadding="1">
+                                        <p:outputLabel value="Email:" for="email" />
+                                        <p:inputText id="email" style="width: 300px" value="#{factura.persona.email}" title="Email" />
+
+                                    </h:panelGrid>                    
+                                </div>
+                            </div>
+
+
+
+
+
+                            <div class="Container50 Responsive50">
+                                <div class="ContainerIndent">                    
+                                    <h:panelGrid columns="1" cellpadding="1">
+
+                                        <p:outputLabel value="Direccion:" for="direccion" />
+                                        <p:inputText id="direccion" style="width: 300px" value="#{factura.persona.direccion}" title="Direccion" />
+
+                                    </h:panelGrid>                    
+                                </div>
+                            </div>
+
+
+
+
+
+                        </p:panel>
 
                     </div>
-                    <h:panelGrid >
-                        <p:commandButton 
-                            value="Grabar factura" 
-                            disabled="#{(factura.facturaObj.cerrada eq 1)}"
-                            process="@form"
-                            update="@form,:f33" 
-                            actionListener="#{factura.buttonAction3}" 
-                            />
-                    </h:panelGrid>
-                </h:form>
+                    <p:commandButton 
+                        value="Grabar factura" 
+                        disabled="#{(factura.facturaObj.cerrada eq 1)}"
+                        process="@form"
+                        update="@form,:f33" 
+                        actionListener="#{factura.buttonAction3}" 
+                        />
+                </div>
             </div>
-        </div>
+        </h:form>
+
+
+
+
+
+
 
 
 
@@ -135,15 +211,13 @@
         <div class="Container100">
             <div class="ContainerIndent">
                 <div class="Card ShadowEffect  ">
-
-
                     <div class="Container100 Responsive100">
                         <div class="ContainerIndent">
                             <h:form id="f33">
                                 <h2 class="BigTopic">Detalle del examen</h2>
-                                <h:panelGrid rendered="#{ not (factura.facturaObj.id eq null)}" columns="2" cellpadding="5">
+                                <h:panelGrid rendered="#{ not (factura.facturaObj.id eq null)}" columns="2" cellpadding="1">
                                     <p:outputLabel value="Descuento:"  />
-                                    <h:panelGrid columns="2"   cellpadding="5">                                    
+                                    <h:panelGrid columns="2"   cellpadding="1">                                    
                                         <p:selectOneRadio id="descso" layout="pageDirection" value="#{factura.aplicaDescuento}">
                                             <f:selectItem itemLabel="No" itemValue="No"  />
                                             <f:selectItem itemLabel="Sí" itemValue="Sí" />
@@ -162,11 +236,11 @@
 
                                     <p:outputLabel value="Item:"  />
                                     <h:panelGrid columns="2">
-                                        <p:autoComplete id="idtes" size="35"  
+                                        <p:autoComplete id="idtes" style="width: 300px"  
                                                         value="#{factura.clasifconvalores.s}" 
                                                         completeMethod="#{factura.completeTextItem}" />
                                         <p:commandButton 
-                                            value="Precio" 
+                                            value="..." 
                                             process="@form"
                                             update="preciocalculado,btnagre" 
                                             actionListener="#{factura.buttonActionPrecio}" />
@@ -188,12 +262,12 @@
                                 </h:panelGrid>
 
 
-                                <h:panelGrid columns="1" cellpadding="5">
+                                <h:panelGrid columns="1" cellpadding="1">
 
 
 
                                 </h:panelGrid>
-                                <h:panelGrid columns="1" cellpadding="5">
+                                <h:panelGrid columns="1" cellpadding="1">
 
                                 </h:panelGrid>
                             </h:form>
@@ -216,7 +290,7 @@
                         <div class="ContainerIndent">
                             <h:form id="f4">
                                 <h2 class="BigTopic">Items</h2>
-                                <h:panelGrid rendered="#{ not (factura.facturaObj.id eq null)}" columns="1" cellpadding="5">
+                                <h:panelGrid rendered="#{ not (factura.facturaObj.id eq null)}" columns="1" cellpadding="1">
                                     <p:commandButton id="deleteButton" icon="ui-icon-trash"  
                                                      value="Quitar de la Lista" 
                                                      actionListener="#{factura.destroy}" 
@@ -235,7 +309,7 @@
                                              rendered="#{ not (factura.facturaObj.id eq null)}"
                                              >
 
-                                    <p:column>
+                                    <p:column width="600">
                                         <f:facet name="header">
                                             <h:outputText value="ClasifDescri"/>
                                         </f:facet>
@@ -271,7 +345,7 @@
                                              reflow="true"
                                              rendered="#{ not (factura.facturaObj.id eq null)}"
                                              >
-                                    <p:column>
+                                    <p:column width="600">
                                         <f:facet name="header">
                                             <h:outputText value=""/>
                                         </f:facet>
@@ -279,19 +353,13 @@
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-
-                                        </f:facet>
-
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Valor Compra"/>
+                                            <h:outputText value="Valor"/>
                                         </f:facet>
                                         <h:outputText value="#{item.valorpu}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Iva Generado"/>
+                                            <h:outputText value="Valor del Iva"/>
                                         </f:facet>
                                         <h:outputText value="#{item.ivaValor}"/>
                                     </p:column>
@@ -306,7 +374,7 @@
 
 
 
-                                <h:panelGrid rendered="#{ not (factura.facturaObj.id eq null)}" columns="1" cellpadding="5">
+                                <h:panelGrid rendered="#{ not (factura.facturaObj.id eq null)}" columns="1" cellpadding="1">
                                     <p:commandButton 
                                         value="Finalizar" 
                                         id="finalizar" 
