@@ -82,6 +82,29 @@ public class T01FacturaDetalle implements Serializable {
         return this.estado;
     }
 
+    @Column(name = "IVA_VALOR")
+    @Basic(optional = true)
+    private BigDecimal ivaValor;
+
+    public void setIvaValor(BigDecimal ivaValor) {
+        this.ivaValor = ivaValor;
+    }
+
+    public BigDecimal getIvaValor() {
+        return this.ivaValor;
+    }
+    @Column(name = "VALOR_CON_IVA")
+    @Basic(optional = true)
+    private BigDecimal valorConIva;
+
+    public void setValorConIva(BigDecimal valorConIva) {
+        this.valorConIva = valorConIva;
+    }
+
+    public BigDecimal getValorConIva() {
+        return this.valorConIva;
+    }
+
     public T01FacturaDetalle() {
     }
 

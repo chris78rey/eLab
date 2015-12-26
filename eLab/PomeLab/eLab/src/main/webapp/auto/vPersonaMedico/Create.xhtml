@@ -12,21 +12,21 @@
             <h:form id="VPersonaMedicoCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{vPersonaMedicoController.selected != null}">
-                        <p:outputLabel value="CreateVPersonaMedicoLabel_ccRucPasaporte" for="ccRucPasaporte" />
+                        <p:outputLabel value="CC:" for="ccRucPasaporte" />
                         <p:inputText id="ccRucPasaporte" value="#{vPersonaMedicoController.selected.ccRucPasaporte}" title="CreateVPersonaMedicoTitle_ccRucPasaporte" />
-                        <p:outputLabel value="CreateVPersonaMedicoLabel_apellidos" for="apellidos" />
+                        <p:outputLabel value="Apellidos:" for="apellidos" />
                         <p:inputText id="apellidos" value="#{vPersonaMedicoController.selected.apellidos}" title="CreateVPersonaMedicoTitle_apellidos" />
-                        <p:outputLabel value="CreateVPersonaMedicoLabel_nombres" for="nombres" />
+                        <p:outputLabel value="Nombres:" for="nombres" />
                         <p:inputText id="nombres" value="#{vPersonaMedicoController.selected.nombres}" title="CreateVPersonaMedicoTitle_nombres" />
-                        <p:outputLabel value="CreateVPersonaMedicoLabel_telef" for="telef" />
+                        <p:outputLabel value="Telef:" for="telef" />
                         <p:inputText id="telef" value="#{vPersonaMedicoController.selected.telef}" title="CreateVPersonaMedicoTitle_telef" />
-                        <p:outputLabel value="CreateVPersonaMedicoLabel_celular" for="celular" />
+                        <p:outputLabel value="Móvil" for="celular" />
                         <p:inputText id="celular" value="#{vPersonaMedicoController.selected.celular}" title="CreateVPersonaMedicoTitle_celular" />
-                        <p:outputLabel value="CreateVPersonaMedicoLabel_email" for="email" />
+                        <p:outputLabel value="Correo:" for="email" />
                         <p:inputText id="email" value="#{vPersonaMedicoController.selected.email}" title="CreateVPersonaMedicoTitle_email" />
-                        <p:outputLabel value="CreateVPersonaMedicoLabel_direccion" for="direccion" />
+                        <p:outputLabel value="Direccion" for="direccion" />
                         <p:inputText id="direccion" value="#{vPersonaMedicoController.selected.direccion}" title="CreateVPersonaMedicoTitle_direccion" />
-                        <p:outputLabel value="CreateVPersonaMedicoLabel_porcentaje" for="porcentaje" />
+                        <p:outputLabel value="Comisión%" for="porcentaje" />
                         <p:inputText id="porcentaje" value="#{vPersonaMedicoController.selected.porcentaje}" title="CreateVPersonaMedicoTitle_porcentaje" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{vPersonaMedicoController.create}" value="Save" update="@all" oncomplete="handleSubmit(args,'VPersonaMedicoCreateDialog');"/>

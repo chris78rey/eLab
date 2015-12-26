@@ -12,23 +12,21 @@
             <h:form id="VPersonaMedicoViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{vPersonaMedicoController.selected != null}">
-                        <h:outputText value="ViewVPersonaMedicoLabel_ccRucPasaporte"/>
+                        <h:outputText value="CC:"/>
                         <h:outputText value="#{vPersonaMedicoController.selected.ccRucPasaporte}" title="ViewVPersonaMedicoTitle_ccRucPasaporte"/>
-                        <h:outputText value="ViewVPersonaMedicoLabel_apellidos"/>
+                        <h:outputText value="Apellidos:"/>
                         <h:outputText value="#{vPersonaMedicoController.selected.apellidos}" title="ViewVPersonaMedicoTitle_apellidos"/>
-                        <h:outputText value="ViewVPersonaMedicoLabel_nombres"/>
+                        <h:outputText value="Nombres:"/>
                         <h:outputText value="#{vPersonaMedicoController.selected.nombres}" title="ViewVPersonaMedicoTitle_nombres"/>
-                        <h:outputText value="ViewVPersonaMedicoLabel_telef"/>
+                        <h:outputText value="Telef:"/>
                         <h:outputText value="#{vPersonaMedicoController.selected.telef}" title="ViewVPersonaMedicoTitle_telef"/>
-                        <h:outputText value="ViewVPersonaMedicoLabel_celular"/>
+                        <h:outputText value="Móvil"/>
                         <h:outputText value="#{vPersonaMedicoController.selected.celular}" title="ViewVPersonaMedicoTitle_celular"/>
-                        <h:outputText value="ViewVPersonaMedicoLabel_email"/>
+                        <h:outputText value="Correo:"/>
                         <h:outputText value="#{vPersonaMedicoController.selected.email}" title="ViewVPersonaMedicoTitle_email"/>
-                        <h:outputText value="ViewVPersonaMedicoLabel_direccion"/>
+                        <h:outputText value="Direccion"/>
                         <h:outputText value="#{vPersonaMedicoController.selected.direccion}" title="ViewVPersonaMedicoTitle_direccion"/>
-                        <h:outputText value="ViewVPersonaMedicoLabel_idMedico"/>
-                        <h:outputText value="#{vPersonaMedicoController.selected.idMedico}" title="ViewVPersonaMedicoTitle_idMedico"/>
-                        <h:outputText value="ViewVPersonaMedicoLabel_porcentaje"/>
+						<h:outputText value="Comisión%"/>
                         <h:outputText value="#{vPersonaMedicoController.selected.porcentaje}" title="ViewVPersonaMedicoTitle_porcentaje"/>
                     </p:panelGrid>
                     <p:commandButton value="Close" onclick="VPersonaMedicoViewDialog.hide()"/>

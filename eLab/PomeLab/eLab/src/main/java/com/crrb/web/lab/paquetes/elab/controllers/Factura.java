@@ -13,6 +13,7 @@ import com.crrb.web.lab.paquetes.elab.entidades.T00Persona;
 import com.crrb.web.lab.paquetes.elab.entidades.T01Factura;
 import com.crrb.web.lab.paquetes.elab.entidades.T01FacturaDetalle;
 import com.crrb.web.lab.paquetes.elab.entidades.VClasifArbol;
+import com.crrb.web.lab.paquetes.elab.entidades.VDetalleIva;
 import com.crrb.web.lab.paquetes.elab.sessionBeans.T00ClienteFacade;
 import com.crrb.web.lab.paquetes.elab.sessionBeans.T00MedicoFacade;
 import com.crrb.web.lab.paquetes.elab.sessionBeans.T00PersonaFacade;
@@ -172,7 +173,7 @@ public class Factura implements Serializable {
 
         descuentoInputText = new Double("0");
         medico.setId(new BigDecimal("-1"));
-        
+
     }
 
     private Double descuentoInputText = new Double("0");
@@ -255,8 +256,14 @@ public class Factura implements Serializable {
 
     public void saveMessage() {
         FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage("Se agrego el item "+ clasifconvalores.getS(), "S"));
+        context.addMessage(null, new FacesMessage("Se agrego el item " + clasifconvalores.getS(), "S"));
 
+    }
+
+    private List<VDetalleIva> LiataIVAByNumeroFactura = new ArrayList<>();
+
+    public List<VDetalleIva> findIVAByNumeroFactura() {
+        return logicaNegocio.findIVAByNumeroFactura(facturaObj.getNumeroFactura());
     }
 
     public void buttonActionFin(ActionEvent actionEvent) {
@@ -542,6 +549,14 @@ public class Factura implements Serializable {
      */
     public void setDescuentoInputText(Double descuentoInputText) {
         this.descuentoInputText = descuentoInputText;
+    }
+
+    /**
+     * @return the LiataIVAByNumeroFactura
+     */
+    public List<VDetalleIva> getLiataIVAByNumeroFactura() {
+        LiataIVAByNumeroFactura = findIVAByNumeroFactura();
+        return LiataIVAByNumeroFactura;
     }
 
     /**

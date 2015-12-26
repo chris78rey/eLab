@@ -12,19 +12,19 @@
             <h:form id="VClienteViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{vClienteController.selected != null}">
-                        <h:outputText value="ViewVClienteLabel_ccRucPasaporte"/>
+                        <h:outputText value="CC:"/>
                         <h:outputText value="#{vClienteController.selected.ccRucPasaporte}" />
-                        <h:outputText value="ViewVClienteLabel_apellidos"/>
+                        <h:outputText value="Apellidos:"/>
                         <h:outputText value="#{vClienteController.selected.apellidos}" />
-                        <h:outputText value="ViewVClienteLabel_nombres"/>
+                        <h:outputText value="Nombres:"/>
                         <h:outputText value="#{vClienteController.selected.nombres}" />
-                        <h:outputText value="ViewVClienteLabel_telef"/>
+                        <h:outputText value="Telef:"/>
                         <h:outputText value="#{vClienteController.selected.telef}" />
-                        <h:outputText value="ViewVClienteLabel_celular"/>
+                        <h:outputText value="Móvil"/>
                         <h:outputText value="#{vClienteController.selected.celular}" />
-                        <h:outputText value="ViewVClienteLabel_email"/>
+                        <h:outputText value="Correo:"/>
                         <h:outputText value="#{vClienteController.selected.email}" />
-                        <h:outputText value="ViewVClienteLabel_direccion"/>
+                        <h:outputText value="Direccion"/>
                         <h:outputText value="#{vClienteController.selected.direccion}" />
                     </p:panelGrid>
                     <p:commandButton value="Close" onclick="VClienteViewDialog.hide()"/>

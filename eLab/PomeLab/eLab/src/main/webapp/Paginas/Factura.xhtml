@@ -141,7 +141,7 @@
                         <div class="ContainerIndent">
                             <h:form id="f33">
                                 <h2 class="BigTopic">Detalle del examen</h2>
-                                <h:panelGrid columns="2" cellpadding="5">
+                                <h:panelGrid rendered="#{ not (factura.facturaObj.id eq null)}" columns="2" cellpadding="5">
                                     <p:outputLabel value="Descuento:"  />
                                     <h:panelGrid columns="2"   cellpadding="5">                                    
                                         <p:selectOneRadio id="descso" layout="pageDirection" value="#{factura.aplicaDescuento}">
@@ -216,7 +216,7 @@
                         <div class="ContainerIndent">
                             <h:form id="f4">
                                 <h2 class="BigTopic">Items</h2>
-                                <h:panelGrid columns="1" cellpadding="5">
+                                <h:panelGrid rendered="#{ not (factura.facturaObj.id eq null)}" columns="1" cellpadding="5">
                                     <p:commandButton id="deleteButton" icon="ui-icon-trash"  
                                                      value="Quitar de la Lista" 
                                                      actionListener="#{factura.destroy}" 
@@ -232,6 +232,7 @@
                                              paginator="true"
                                              rowKey="#{item.id}"
                                              reflow="true"
+                                             rendered="#{ not (factura.facturaObj.id eq null)}"
                                              >
 
                                     <p:column>
@@ -246,9 +247,66 @@
                                         </f:facet>
                                         <h:outputText value="#{item.valor}"/>
                                     </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Valor del IVA"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.ivaValor}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Valor con IVA"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.valorConIva}"/>
+                                    </p:column>
+                                    <f:facet name="footer">
+
+                                    </f:facet>
                                 </p:dataTable>
 
-                                <h:panelGrid columns="1" cellpadding="5">
+
+                                <p:dataTable id="dtIVA" value="#{factura.liataIVAByNumeroFactura}" var="item"
+                                             style="width: 90%;margin-left:2%;margin-right:2%;"  
+                                             paginator="false"
+                                             reflow="true"
+                                             rendered="#{ not (factura.facturaObj.id eq null)}"
+                                             >
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value=""/>
+                                        </f:facet>
+
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+
+                                        </f:facet>
+
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Valor Compra"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.valorpu}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Iva Generado"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.ivaValor}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Total"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.valorConIva}"/>
+                                    </p:column>
+                                </p:dataTable>
+
+
+
+
+                                <h:panelGrid rendered="#{ not (factura.facturaObj.id eq null)}" columns="1" cellpadding="5">
                                     <p:commandButton 
                                         value="Finalizar" 
                                         id="finalizar" 

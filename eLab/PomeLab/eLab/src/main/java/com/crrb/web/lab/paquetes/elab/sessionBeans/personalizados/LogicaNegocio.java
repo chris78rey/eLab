@@ -18,6 +18,8 @@ import com.crrb.web.lab.paquetes.elab.entidades.T01FacturaDetalle_;
 import com.crrb.web.lab.paquetes.elab.entidades.T01Factura_;
 import com.crrb.web.lab.paquetes.elab.entidades.VClasifArbol;
 import com.crrb.web.lab.paquetes.elab.entidades.VClasifArbol_;
+import com.crrb.web.lab.paquetes.elab.entidades.VDetalleIva;
+import com.crrb.web.lab.paquetes.elab.entidades.VDetalleIva_;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -205,6 +207,16 @@ public class LogicaNegocio {
         CriteriaQuery<T00Clasificador> cq = cb.createQuery(T00Clasificador.class);
         Root<T00Clasificador> root = cq.from(T00Clasificador.class);
         cq.where(cb.equal(root.get(T00Clasificador_.descripcion), par.toUpperCase()));
+        List resultList = em.createQuery(cq).setHint("eclipselink.refresh", "true").getResultList();
+        return resultList;
+    }
+
+    public List<VDetalleIva> findIVAByNumeroFactura(String pnumeroFactura) {
+        pnumeroFactura = (pnumeroFactura == null) ? "-1" : pnumeroFactura;
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<VDetalleIva> cq = cb.createQuery(VDetalleIva.class);
+        Root<VDetalleIva> root = cq.from(VDetalleIva.class);
+        cq.where(cb.equal(root.get(VDetalleIva_.numeroFactura), pnumeroFactura));
         List resultList = em.createQuery(cq).setHint("eclipselink.refresh", "true").getResultList();
         return resultList;
     }
