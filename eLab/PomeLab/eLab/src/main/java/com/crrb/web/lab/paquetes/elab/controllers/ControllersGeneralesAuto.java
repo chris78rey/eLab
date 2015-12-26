@@ -22,7 +22,7 @@ import javax.ejb.EJB;
 public class ControllersGeneralesAuto implements Serializable {
 
     @EJB
-    private LogicaNegocio logicaNegocio;
+    private transient LogicaNegocio logicaNegocio;
 
     public List<VClasifArbol> getFindArbolClasif() {
         return logicaNegocio.findArbolClasif2();

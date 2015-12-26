@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListImagenesTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="ImagenesListForm">
+                <p:panel header="#{bundle.ListImagenesTitle}">
+                    <p:dataTable id="datalist" value="#{imagenesController.items}" var="item"
+                                 selectionMode="single" selection="#{imagenesController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update=":VMappingCreateForm"/>
+                        <p:ajax event="rowUnselect" update=":VMappingCreateForm"/>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListImagenesTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+
+
+                    </p:dataTable>
+                    <p:commandButton id="createButton" 
+                                     icon="ui-icon-plus"   value="Foto" 
+                                     update="ImagenesListForm" 
+                                     oncomplete="PF('VfotoDialog').show()"/>
+
+                </p:panel>
+            </h:form>
+
+
+            <p:dialog id="VMappingCreateDlg" widgetVar="VfotoDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateVMappingTitle}">
+                <h:form id="VMappingCreateForm">
+                    <h:panelGroup id="display">
+                        <p:media rendered="#{not(imagenesController.content eq null)}" 
+                                 cache="false"  
+                                 value="#{imagenesController.content}"  
+                                 player="real"/>
+
+                    </h:panelGroup>
+                </h:form>
+            </p:dialog>
+
+
+        </ui:define>
+    </ui:composition>
+
+</html>

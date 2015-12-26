@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+        <div class="Container100">
+            <div class="ContainerIndent">
+                <div class="Card ShadowEffect  ">
+                    <div class="Container50 Responsive50">
+                        <div class="ContainerIndent">
+                            <h2 class="BigTopic">AutoComplete</h2>
+                            <h:panelGrid columns="1" cellpadding="5">
+                                <p:outputLabel value="Simple:" for="acSimple" />
+                                <p:autoComplete id="acSimple" value="#{autoCompleteView.txt1}" completeMethod="#{autoCompleteView.completeText}" />
+
+                                <p:outputLabel value="DropDown:" for="dd" />
+                                <p:autoComplete id="dd" dropdown="true" value="#{autoCompleteView.txt6}" completeMethod="#{autoCompleteView.completeText}" />
+
+                                <p:outputLabel value="Group:" for="group" />
+                                <p:autoComplete id="group" value="#{autoCompleteView.theme4}" completeMethod="#{autoCompleteView.completeThemeContains}"
+                                                var="theme" itemLabel="#{theme.displayName}" itemValue="#{theme}" converter="theme"
+                                                groupBy="#{autoCompleteView.getThemeGroup(theme)}" scrollHeight="250"/>
+                            </h:panelGrid>
+                        </div>
+                    </div>
+                    <div class="Container50 Responsive50">
+                        <div class="ContainerIndent">
+                            <h2 class="BigTopic">Checkboxes</h2>
+                            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                                <p:outputLabel value="SelectManyCheckbox:" />
+                                <p:selectManyCheckbox layout="pageDirection">
+                                    <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+                                    <f:selectItem itemLabel="PS4" itemValue="PS+" />
+                                    <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+                                </p:selectManyCheckbox>
+                            </h:panelGrid>
+                            <h:panelGrid>
+                                <p:selectBooleanCheckbox value="accept" styleClass="Fleft" itemLabel="First PrimeFaces Checkbox"/>
+                            </h:panelGrid>
+                            <h:panelGrid>
+                                <p:selectBooleanCheckbox value="accept" styleClass="Fleft" itemLabel="Second PrimeFaces Checkbox"/>
+                            </h:panelGrid>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </ui:define>
+
+</ui:composition>
