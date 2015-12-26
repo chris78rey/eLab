@@ -8,11 +8,11 @@
 
     <ui:composition>
 
-        <p:dialog id="VClasifArbolCreateDlg" widgetVar="VClasifArbolCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateVClasifArbolTitle}">
+        <p:dialog id="VClasifArbolCreateDlg" widgetVar="VClasifArbolCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="CreateVClasifArbolTitle">
             <h:form id="VClasifArbolCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{vClasifArbolController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateVClasifArbolLabel_idPadre}"  />
+                        <p:outputLabel value="CreateVClasifArbolLabel_idPadre"  />
 
 
                         <p:selectOneMenu   value="#{vClasifArbolController.selected.idPadre}"  >
@@ -22,17 +22,17 @@
                         </p:selectOneMenu>
 
 
-                        <p:outputLabel value="#{bundle.ListVClasifArbolTitle_s}" for="s" />
-                        <p:inputText id="s" value="#{vClasifArbolController.selected.s}" title="#{bundle.CreateVClasifArbolTitle_s}" />
-                        <p:outputLabel value="#{bundle.CreateVClasifArbolLabel_conDescuento}" for="conDescuento" />
-                        <p:inputText id="conDescuento" value="#{vClasifArbolController.selected.conDescuento}" title="#{bundle.CreateVClasifArbolTitle_conDescuento}" />
-                        <p:outputLabel value="#{bundle.CreateVClasifArbolLabel_sinDescuento}" for="sinDescuento" />
-                        <p:inputText id="sinDescuento" value="#{vClasifArbolController.selected.sinDescuento}" title="#{bundle.CreateVClasifArbolTitle_sinDescuento}" />
-                        <p:outputLabel value="#{bundle.CreateVClasifArbolLabel_iva}" for="iva" />
-                        <p:inputText id="iva" value="#{vClasifArbolController.selected.iva}" title="#{bundle.CreateVClasifArbolTitle_iva}" />
+                        <p:outputLabel value="ListVClasifArbolTitle_s" for="s" />
+                        <p:inputText id="s" value="#{vClasifArbolController.selected.s}" title="CreateVClasifArbolTitle_s" />
+                        <p:outputLabel value="CreateVClasifArbolLabel_conDescuento" for="conDescuento" />
+                        <p:inputText id="conDescuento" value="#{vClasifArbolController.selected.conDescuento}" title="CreateVClasifArbolTitle_conDescuento" />
+                        <p:outputLabel value="CreateVClasifArbolLabel_sinDescuento" for="sinDescuento" />
+                        <p:inputText id="sinDescuento" value="#{vClasifArbolController.selected.sinDescuento}" title="CreateVClasifArbolTitle_sinDescuento" />
+                        <p:outputLabel value="CreateVClasifArbolLabel_iva" for="iva" />
+                        <p:inputText id="iva" value="#{vClasifArbolController.selected.iva}" title="CreateVClasifArbolTitle_iva" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{vClasifArbolController.create}" value="#{bundle.Save}" process="@form" update="@all" oncomplete="handleSubmit(args,'VClasifArbolCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="VClasifArbolCreateDialog.hide()"/>
+                    <p:commandButton actionListener="#{vClasifArbolController.create}" value="Save" process="@form" update="@all" oncomplete="handleSubmit(args,'VClasifArbolCreateDialog');"/>
+                    <p:commandButton value="Cancel" onclick="VClasifArbolCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

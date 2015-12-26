@@ -8,26 +8,26 @@
 
     <ui:composition>
 
-        <p:dialog id="VClienteViewDlg" widgetVar="VClienteViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewVClienteTitle}">
+        <p:dialog id="VClienteViewDlg" widgetVar="VClienteViewDialog" modal="true" resizable="false" appendTo="@(body)" header="Ver">
             <h:form id="VClienteViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{vClienteController.selected != null}">
-                        <h:outputText value="#{bundle.ViewVClienteLabel_ccRucPasaporte}"/>
-                        <h:outputText value="#{vClienteController.selected.ccRucPasaporte}" title="#{bundle.ViewVClienteTitle_ccRucPasaporte}"/>
-                        <h:outputText value="#{bundle.ViewVClienteLabel_apellidos}"/>
-                        <h:outputText value="#{vClienteController.selected.apellidos}" title="#{bundle.ViewVClienteTitle_apellidos}"/>
-                        <h:outputText value="#{bundle.ViewVClienteLabel_nombres}"/>
-                        <h:outputText value="#{vClienteController.selected.nombres}" title="#{bundle.ViewVClienteTitle_nombres}"/>
-                        <h:outputText value="#{bundle.ViewVClienteLabel_telef}"/>
-                        <h:outputText value="#{vClienteController.selected.telef}" title="#{bundle.ViewVClienteTitle_telef}"/>
-                        <h:outputText value="#{bundle.ViewVClienteLabel_celular}"/>
-                        <h:outputText value="#{vClienteController.selected.celular}" title="#{bundle.ViewVClienteTitle_celular}"/>
-                        <h:outputText value="#{bundle.ViewVClienteLabel_email}"/>
-                        <h:outputText value="#{vClienteController.selected.email}" title="#{bundle.ViewVClienteTitle_email}"/>
-                        <h:outputText value="#{bundle.ViewVClienteLabel_direccion}"/>
-                        <h:outputText value="#{vClienteController.selected.direccion}" title="#{bundle.ViewVClienteTitle_direccion}"/>
+                        <h:outputText value="ViewVClienteLabel_ccRucPasaporte"/>
+                        <h:outputText value="#{vClienteController.selected.ccRucPasaporte}" />
+                        <h:outputText value="ViewVClienteLabel_apellidos"/>
+                        <h:outputText value="#{vClienteController.selected.apellidos}" />
+                        <h:outputText value="ViewVClienteLabel_nombres"/>
+                        <h:outputText value="#{vClienteController.selected.nombres}" />
+                        <h:outputText value="ViewVClienteLabel_telef"/>
+                        <h:outputText value="#{vClienteController.selected.telef}" />
+                        <h:outputText value="ViewVClienteLabel_celular"/>
+                        <h:outputText value="#{vClienteController.selected.celular}" />
+                        <h:outputText value="ViewVClienteLabel_email"/>
+                        <h:outputText value="#{vClienteController.selected.email}" />
+                        <h:outputText value="ViewVClienteLabel_direccion"/>
+                        <h:outputText value="#{vClienteController.selected.direccion}" />
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="VClienteViewDialog.hide()"/>
+                    <p:commandButton value="Close" onclick="VClienteViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

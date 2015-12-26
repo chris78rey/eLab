@@ -10,13 +10,13 @@
 
 
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListVPersonaMedicoTitle}"></h:outputText>
+            <h:outputText value="ListVPersonaMedicoTitle"></h:outputText>
         </ui:define>
 
         <ui:define name="content">
             <p:growl id="growl" life="3000" />
             <h:form id="VPersonaMedicoListForm">
-                <p:panel header="#{bundle.ListVPersonaMedicoTitle}">
+                <p:panel header="ListVPersonaMedicoTitle">
                     <p:dataTable id="datalist" value="#{vPersonaMedicoController.items}" var="item"
                                  selectionMode="single" selection="#{vPersonaMedicoController.selected}"
                                  paginator="true"
@@ -33,58 +33,58 @@
 
                         <p:column  filterBy="#{item.ccRucPasaporte}"  filterMatchMode="contains" >
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVPersonaMedicoTitle_ccRucPasaporte}"/>
+                                <h:outputText value="ListVPersonaMedicoTitle_ccRucPasaporte"/>
                             </f:facet>
                             <h:outputText value="#{item.ccRucPasaporte}"/>
                         </p:column>
                         <p:column filterBy="#{item.apellidos}"  filterMatchMode="contains">
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVPersonaMedicoTitle_apellidos}"/>
+                                <h:outputText value="ListVPersonaMedicoTitle_apellidos"/>
                             </f:facet>
                             <h:outputText value="#{item.apellidos}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVPersonaMedicoTitle_nombres}"/>
+                                <h:outputText value="ListVPersonaMedicoTitle_nombres"/>
                             </f:facet>
                             <h:outputText value="#{item.nombres}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVPersonaMedicoTitle_telef}"/>
+                                <h:outputText value="ListVPersonaMedicoTitle_telef"/>
                             </f:facet>
                             <h:outputText value="#{item.telef}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVPersonaMedicoTitle_celular}"/>
+                                <h:outputText value="ListVPersonaMedicoTitle_celular"/>
                             </f:facet>
                             <h:outputText value="#{item.celular}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVPersonaMedicoTitle_email}"/>
+                                <h:outputText value="ListVPersonaMedicoTitle_email"/>
                             </f:facet>
                             <h:outputText value="#{item.email}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVPersonaMedicoTitle_direccion}"/>
+                                <h:outputText value="ListVPersonaMedicoTitle_direccion"/>
                             </f:facet>
                             <h:outputText value="#{item.direccion}"/>
                         </p:column>
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVPersonaMedicoTitle_porcentaje}"/>
+                                <h:outputText value="ListVPersonaMedicoTitle_porcentaje"/>
                             </f:facet>
                             <h:outputText value="#{item.porcentaje}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{vPersonaMedicoController.prepareCreate}" update=":VPersonaMedicoCreateForm" oncomplete="PF('VPersonaMedicoCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":VPersonaMedicoViewForm" oncomplete="PF('VPersonaMedicoViewDialog').show()" disabled="#{empty vPersonaMedicoController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":VPersonaMedicoEditForm" oncomplete="PF('VPersonaMedicoEditDialog').show()" disabled="#{empty vPersonaMedicoController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{vPersonaMedicoController.destroy}" update=":growl,datalist" disabled="#{empty vPersonaMedicoController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="Create" actionListener="#{vPersonaMedicoController.prepareCreate}" update=":VPersonaMedicoCreateForm" oncomplete="PF('VPersonaMedicoCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="View" update=":VPersonaMedicoViewForm" oncomplete="PF('VPersonaMedicoViewDialog').show()" disabled="#{empty vPersonaMedicoController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Edit" update=":VPersonaMedicoEditForm" oncomplete="PF('VPersonaMedicoEditDialog').show()" disabled="#{empty vPersonaMedicoController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Delete" actionListener="#{vPersonaMedicoController.destroy}" update=":growl,datalist" disabled="#{empty vPersonaMedicoController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

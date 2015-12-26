@@ -8,32 +8,32 @@
 
     <ui:composition>
 
-        <p:dialog id="VClienteCreateDlg" widgetVar="VClienteCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateVClienteTitle}">
+        <p:dialog id="VClienteCreateDlg" widgetVar="VClienteCreateDialog" modal="true" resizable="false" appendTo="@(body)" >
             <h:form id="VClienteCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{vClienteController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateVClienteLabel_ccRucPasaporte}" for="ccRucPasaporte" />
-                        <p:inputText id="ccRucPasaporte" value="#{vClienteController.selected.ccRucPasaporte}" title="#{bundle.CreateVClienteTitle_ccRucPasaporte}" />
-                        <p:outputLabel value="#{bundle.CreateVClienteLabel_apellidos}" for="apellidos" />
-                        <p:inputText id="apellidos" value="#{vClienteController.selected.apellidos}" title="#{bundle.CreateVClienteTitle_apellidos}" />
-                        <p:outputLabel value="#{bundle.CreateVClienteLabel_nombres}" for="nombres" />
-                        <p:inputText id="nombres" value="#{vClienteController.selected.nombres}" title="#{bundle.CreateVClienteTitle_nombres}" />
-                        <p:outputLabel value="#{bundle.CreateVClienteLabel_telef}" for="telef" />
-                        <p:inputText id="telef" value="#{vClienteController.selected.telef}" title="#{bundle.CreateVClienteTitle_telef}" />
-                        <p:outputLabel value="#{bundle.CreateVClienteLabel_celular}" for="celular" />
-                        <p:inputText id="celular" value="#{vClienteController.selected.celular}" title="#{bundle.CreateVClienteTitle_celular}" />
-                        <p:outputLabel value="#{bundle.CreateVClienteLabel_email}" for="email" />
-                        <p:inputText id="email" value="#{vClienteController.selected.email}" title="#{bundle.CreateVClienteTitle_email}" />
-                        <p:outputLabel value="#{bundle.CreateVClienteLabel_direccion}" for="direccion" />
-                        <p:inputText id="direccion" value="#{vClienteController.selected.direccion}" title="#{bundle.CreateVClienteTitle_direccion}" />
+                        <p:outputLabel value="CC:" for="ccRucPasaporte" />
+                        <p:inputText id="ccRucPasaporte" value="#{vClienteController.selected.ccRucPasaporte}"  />
+                        <p:outputLabel value="Apellidos:" for="apellidos" />
+                        <p:inputText id="apellidos" value="#{vClienteController.selected.apellidos}"  />
+                        <p:outputLabel value="Nombres:" for="nombres" />
+                        <p:inputText id="nombres" value="#{vClienteController.selected.nombres}"  />
+                        <p:outputLabel value="Telef:" for="telef" />
+                        <p:inputText id="telef" value="#{vClienteController.selected.telef}"  />
+                        <p:outputLabel value="Móvil:" for="celular" />
+                        <p:inputText id="celular" value="#{vClienteController.selected.celular}"  />
+                        <p:outputLabel value="Correo:" for="email" />
+                        <p:inputText id="email" value="#{vClienteController.selected.email}" />
+                        <p:outputLabel value="Dirección:" for="direccion" />
+                        <p:inputText id="direccion" value="#{vClienteController.selected.direccion}"  />
                     </p:panelGrid>
                     <p:commandButton 
                         actionListener="#{vClienteController.create}" 
-                        value="#{bundle.Save}" 
+                        value="Grabar" 
                         update="@this,:VClienteListForm" 
                         oncomplete="handleSubmit(args,'VClienteCreateDialog');"
                         />
-                    <p:commandButton value="#{bundle.Cancel}" onclick="VClienteCreateDialog.hide()"/>
+                    <p:commandButton value="Cancelar" onclick="VClienteCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

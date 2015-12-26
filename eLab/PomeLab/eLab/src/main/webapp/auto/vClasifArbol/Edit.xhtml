@@ -8,28 +8,28 @@
 
     <ui:composition>
 
-        <p:dialog id="VClasifArbolEditDlg" widgetVar="VClasifArbolEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditVClasifArbolTitle}">
+        <p:dialog id="VClasifArbolEditDlg" widgetVar="VClasifArbolEditDialog" modal="true" resizable="false" appendTo="@(body)" header="EditVClasifArbolTitle">
             <h:form id="VClasifArbolEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{vClasifArbolController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditVClasifArbolLabel_idPadre}"  />
+                        <p:outputLabel value="EditVClasifArbolLabel_idPadre"  />
 
                         <p:selectOneMenu   value="#{vClasifArbolController.selected.idPadre}"  >
                             <f:selectItem itemLabel="Select One" itemValue="" />
                             <f:selectItems  value="#{vClasifArbolController.findArbolClasif}" var="item" itemValue="#{item.id}" itemLabel="#{item.s}" />
 
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.ListVClasifArbolTitle_s}" for="s" />
-                        <p:inputText id="s" value="#{vClasifArbolController.selected.s}" title="#{bundle.EditVClasifArbolTitle_s}" />
-                        <p:outputLabel value="#{bundle.EditVClasifArbolLabel_conDescuento}" for="conDescuento" />
-                        <p:inputText id="conDescuento" value="#{vClasifArbolController.selected.conDescuento}" title="#{bundle.EditVClasifArbolTitle_conDescuento}" />
-                        <p:outputLabel value="#{bundle.EditVClasifArbolLabel_sinDescuento}" for="sinDescuento" />
-                        <p:inputText id="sinDescuento" value="#{vClasifArbolController.selected.sinDescuento}" title="#{bundle.EditVClasifArbolTitle_sinDescuento}" />
-                        <p:outputLabel value="#{bundle.EditVClasifArbolLabel_iva}" for="iva" />
-                        <p:inputText id="iva" value="#{vClasifArbolController.selected.iva}" title="#{bundle.EditVClasifArbolTitle_iva}" />
+                        <p:outputLabel value="ListVClasifArbolTitle_s" for="s" />
+                        <p:inputText id="s" value="#{vClasifArbolController.selected.s}" title="EditVClasifArbolTitle_s" />
+                        <p:outputLabel value="EditVClasifArbolLabel_conDescuento" for="conDescuento" />
+                        <p:inputText id="conDescuento" value="#{vClasifArbolController.selected.conDescuento}" title="EditVClasifArbolTitle_conDescuento" />
+                        <p:outputLabel value="EditVClasifArbolLabel_sinDescuento" for="sinDescuento" />
+                        <p:inputText id="sinDescuento" value="#{vClasifArbolController.selected.sinDescuento}" title="EditVClasifArbolTitle_sinDescuento" />
+                        <p:outputLabel value="EditVClasifArbolLabel_iva" for="iva" />
+                        <p:inputText id="iva" value="#{vClasifArbolController.selected.iva}" title="EditVClasifArbolTitle_iva" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{vClasifArbolController.update}" value="#{bundle.Save}" process="@form" update="@all" oncomplete="handleSubmit(args, 'VClasifArbolEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="VClasifArbolEditDialog.hide()"/>
+                    <p:commandButton actionListener="#{vClasifArbolController.update}" value="Save" process="@form" update="@all" oncomplete="handleSubmit(args, 'VClasifArbolEditDialog');"/>
+                    <p:commandButton value="Cancel" onclick="VClasifArbolEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

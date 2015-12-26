@@ -8,26 +8,26 @@
 
     <ui:composition>
 
-        <p:dialog id="VClasifArbolViewDlg" widgetVar="VClasifArbolViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewVClasifArbolTitle}">
+        <p:dialog id="VClasifArbolViewDlg" widgetVar="VClasifArbolViewDialog" modal="true" resizable="false" appendTo="@(body)" header="ViewVClasifArbolTitle">
             <h:form id="VClasifArbolViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{vClasifArbolController.selected != null}">
-                        <h:outputText value="#{bundle.ViewVClasifArbolLabel_idPadre}"/>
-                        <h:outputText value="#{vClasifArbolController.selected.idPadre}" title="#{bundle.ViewVClasifArbolTitle_idPadre}"/>
-                        <h:outputText value="#{bundle.ViewVClasifArbolLabel_id}"/>
-                        <h:outputText value="#{vClasifArbolController.selected.id}" title="#{bundle.ViewVClasifArbolTitle_id}"/>
-                        <h:outputText value="#{bundle.ViewVClasifArbolLabel_nivel}"/>
-                        <h:outputText value="#{vClasifArbolController.selected.nivel}" title="#{bundle.ViewVClasifArbolTitle_nivel}"/>
-                        <h:outputText value="#{bundle.ListVClasifArbolTitle_s}"/>
-                        <h:outputText value="#{vClasifArbolController.selected.s}" title="#{bundle.ViewVClasifArbolTitle_s}"/>
-                        <h:outputText value="#{bundle.ViewVClasifArbolLabel_conDescuento}"/>
-                        <h:outputText value="#{vClasifArbolController.selected.conDescuento}" title="#{bundle.ViewVClasifArbolTitle_conDescuento}"/>
-                        <h:outputText value="#{bundle.ViewVClasifArbolLabel_sinDescuento}"/>
-                        <h:outputText value="#{vClasifArbolController.selected.sinDescuento}" title="#{bundle.ViewVClasifArbolTitle_sinDescuento}"/>
-                        <h:outputText value="#{bundle.ViewVClasifArbolLabel_iva}"/>
-                        <h:outputText value="#{vClasifArbolController.selected.iva}" title="#{bundle.ViewVClasifArbolTitle_iva}"/>
+                        <h:outputText value="ViewVClasifArbolLabel_idPadre"/>
+                        <h:outputText value="#{vClasifArbolController.selected.idPadre}" title="ViewVClasifArbolTitle_idPadre"/>
+                        <h:outputText value="ViewVClasifArbolLabel_id"/>
+                        <h:outputText value="#{vClasifArbolController.selected.id}" title="ViewVClasifArbolTitle_id"/>
+                        <h:outputText value="ViewVClasifArbolLabel_nivel"/>
+                        <h:outputText value="#{vClasifArbolController.selected.nivel}" title="ViewVClasifArbolTitle_nivel"/>
+                        <h:outputText value="ListVClasifArbolTitle_s"/>
+                        <h:outputText value="#{vClasifArbolController.selected.s}" title="ViewVClasifArbolTitle_s"/>
+                        <h:outputText value="ViewVClasifArbolLabel_conDescuento"/>
+                        <h:outputText value="#{vClasifArbolController.selected.conDescuento}" title="ViewVClasifArbolTitle_conDescuento"/>
+                        <h:outputText value="ViewVClasifArbolLabel_sinDescuento"/>
+                        <h:outputText value="#{vClasifArbolController.selected.sinDescuento}" title="ViewVClasifArbolTitle_sinDescuento"/>
+                        <h:outputText value="ViewVClasifArbolLabel_iva"/>
+                        <h:outputText value="#{vClasifArbolController.selected.iva}" title="ViewVClasifArbolTitle_iva"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="VClasifArbolViewDialog.hide()"/>
+                    <p:commandButton value="Close" onclick="VClasifArbolViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

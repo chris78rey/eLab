@@ -8,29 +8,29 @@
 
     <ui:composition>
 
-        <p:dialog id="VPersonaMedicoEditDlg" widgetVar="VPersonaMedicoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditVPersonaMedicoTitle}">
+        <p:dialog id="VPersonaMedicoEditDlg" widgetVar="VPersonaMedicoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="EditVPersonaMedicoTitle">
             <h:form id="VPersonaMedicoEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{vPersonaMedicoController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditVPersonaMedicoLabel_ccRucPasaporte}" for="ccRucPasaporte" />
-                        <p:inputText id="ccRucPasaporte" value="#{vPersonaMedicoController.selected.ccRucPasaporte}" title="#{bundle.EditVPersonaMedicoTitle_ccRucPasaporte}" />
-                        <p:outputLabel value="#{bundle.EditVPersonaMedicoLabel_apellidos}" for="apellidos" />
-                        <p:inputText id="apellidos" value="#{vPersonaMedicoController.selected.apellidos}" title="#{bundle.EditVPersonaMedicoTitle_apellidos}" />
-                        <p:outputLabel value="#{bundle.EditVPersonaMedicoLabel_nombres}" for="nombres" />
-                        <p:inputText id="nombres" value="#{vPersonaMedicoController.selected.nombres}" title="#{bundle.EditVPersonaMedicoTitle_nombres}" />
-                        <p:outputLabel value="#{bundle.EditVPersonaMedicoLabel_telef}" for="telef" />
-                        <p:inputText id="telef" value="#{vPersonaMedicoController.selected.telef}" title="#{bundle.EditVPersonaMedicoTitle_telef}" />
-                        <p:outputLabel value="#{bundle.EditVPersonaMedicoLabel_celular}" for="celular" />
-                        <p:inputText id="celular" value="#{vPersonaMedicoController.selected.celular}" title="#{bundle.EditVPersonaMedicoTitle_celular}" />
-                        <p:outputLabel value="#{bundle.EditVPersonaMedicoLabel_email}" for="email" />
-                        <p:inputText id="email" value="#{vPersonaMedicoController.selected.email}" title="#{bundle.EditVPersonaMedicoTitle_email}" />
-                        <p:outputLabel value="#{bundle.EditVPersonaMedicoLabel_direccion}" for="direccion" />
-                        <p:inputText id="direccion" value="#{vPersonaMedicoController.selected.direccion}" title="#{bundle.EditVPersonaMedicoTitle_direccion}" />
-                        <p:outputLabel value="#{bundle.EditVPersonaMedicoLabel_porcentaje}" for="porcentaje" />
-                        <p:inputText id="porcentaje" value="#{vPersonaMedicoController.selected.porcentaje}" title="#{bundle.EditVPersonaMedicoTitle_porcentaje}" />
+                        <p:outputLabel value="EditVPersonaMedicoLabel_ccRucPasaporte" for="ccRucPasaporte" />
+                        <p:inputText id="ccRucPasaporte" value="#{vPersonaMedicoController.selected.ccRucPasaporte}" title="EditVPersonaMedicoTitle_ccRucPasaporte" />
+                        <p:outputLabel value="EditVPersonaMedicoLabel_apellidos" for="apellidos" />
+                        <p:inputText id="apellidos" value="#{vPersonaMedicoController.selected.apellidos}" title="EditVPersonaMedicoTitle_apellidos" />
+                        <p:outputLabel value="EditVPersonaMedicoLabel_nombres" for="nombres" />
+                        <p:inputText id="nombres" value="#{vPersonaMedicoController.selected.nombres}" title="EditVPersonaMedicoTitle_nombres" />
+                        <p:outputLabel value="EditVPersonaMedicoLabel_telef" for="telef" />
+                        <p:inputText id="telef" value="#{vPersonaMedicoController.selected.telef}" title="EditVPersonaMedicoTitle_telef" />
+                        <p:outputLabel value="EditVPersonaMedicoLabel_celular" for="celular" />
+                        <p:inputText id="celular" value="#{vPersonaMedicoController.selected.celular}" title="EditVPersonaMedicoTitle_celular" />
+                        <p:outputLabel value="EditVPersonaMedicoLabel_email" for="email" />
+                        <p:inputText id="email" value="#{vPersonaMedicoController.selected.email}" title="EditVPersonaMedicoTitle_email" />
+                        <p:outputLabel value="EditVPersonaMedicoLabel_direccion" for="direccion" />
+                        <p:inputText id="direccion" value="#{vPersonaMedicoController.selected.direccion}" title="EditVPersonaMedicoTitle_direccion" />
+                        <p:outputLabel value="EditVPersonaMedicoLabel_porcentaje" for="porcentaje" />
+                        <p:inputText id="porcentaje" value="#{vPersonaMedicoController.selected.porcentaje}" title="EditVPersonaMedicoTitle_porcentaje" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{vPersonaMedicoController.update}" value="#{bundle.Save}" update="@this,:VPersonaMedicoListForm" oncomplete="handleSubmit(args, 'VPersonaMedicoEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="VPersonaMedicoEditDialog.hide()"/>
+                    <p:commandButton actionListener="#{vPersonaMedicoController.update}" value="Save" update="@all" oncomplete="handleSubmit(args, 'VPersonaMedicoEditDialog');"/>
+                    <p:commandButton value="Cancel" onclick="VPersonaMedicoEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

@@ -16,7 +16,7 @@
         <ui:define name="content">
             <p:growl id="growl" life="3000" />
             <h:form id="VClienteListForm">
-                <p:panel header="#{bundle.ListVClienteTitle}">
+                <p:panel header="Listado de Clientes">
                     <p:dataTable id="datalist" value="#{vClienteController.items}" var="item"
                                  selectionMode="single" selection="#{vClienteController.selected}"
                                  paginator="true"
@@ -33,52 +33,52 @@
 
                         <p:column filterBy="#{item.ccRucPasaporte}"  filterMatchMode="contains" >
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVClienteTitle_ccRucPasaporte}"/>
+                                <h:outputText value="CC:"/>
                             </f:facet>
                             <h:outputText value="#{item.ccRucPasaporte}"/>
                         </p:column>
                         <p:column filterBy="#{item.apellidos}"  filterMatchMode="contains" >
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVClienteTitle_apellidos}"/>
+                                <h:outputText value="Apellidos:"/>
                             </f:facet>
                             <h:outputText value="#{item.apellidos}"/>
                         </p:column>
                         <p:column filterBy="#{item.nombres}"  filterMatchMode="contains">
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVClienteTitle_nombres}"/>
+                                <h:outputText value="Nombres:"/>
                             </f:facet>
                             <h:outputText value="#{item.nombres}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVClienteTitle_telef}"/>
+                                <h:outputText value="Telef"/>
                             </f:facet>
                             <h:outputText value="#{item.telef}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVClienteTitle_celular}"/>
+                                <h:outputText value="Móvil"/>
                             </f:facet>
                             <h:outputText value="#{item.celular}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVClienteTitle_email}"/>
+                                <h:outputText value="correo"/>
                             </f:facet>
                             <h:outputText value="#{item.email}"/>
                         </p:column>
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVClienteTitle_direccion}"/>
+                                <h:outputText value="Dirección"/>
                             </f:facet>
                             <h:outputText value="#{item.direccion}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{vClienteController.prepareCreate}" update=":VClienteCreateForm" oncomplete="PF('VClienteCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":VClienteViewForm" oncomplete="PF('VClienteViewDialog').show()" disabled="#{empty vClienteController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":VClienteEditForm" oncomplete="PF('VClienteEditDialog').show()" disabled="#{empty vClienteController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{vClienteController.destroy}" update=":growl,datalist" disabled="#{empty vClienteController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="Crear" actionListener="#{vClienteController.prepareCreate}" update=":VClienteCreateForm" oncomplete="PF('VClienteCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="Ver" update=":VClienteViewForm" oncomplete="PF('VClienteViewDialog').show()" disabled="#{empty vClienteController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Editar" update=":VClienteEditForm" oncomplete="PF('VClienteEditDialog').show()" disabled="#{empty vClienteController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Eliminar" actionListener="#{vClienteController.destroy}" update=":growl,datalist" disabled="#{empty vClienteController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
